@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 
 function NotFoundComponent() {
   return (
@@ -112,12 +113,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <HeadContent />
       </head>
       <body>
         {children}
+        <CookieConsentBanner />
         <Scripts />
       </body>
     </html>

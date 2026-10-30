@@ -1,10 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
 import { submitLead, type LeadInput } from "@/lib/leads.functions";
 import { COUNTRIES } from "@/lib/countries";
 import { getSolution } from "@/lib/solutions";
+import {
+  createConsentAuditProof,
+  LEGAL_VERSIONS,
+  type ConsentAuditProof,
+} from "@/lib/consent-audit";
 import logoAsset from "@/assets/selemma-logo.png.asset.json";
 
 export const Route = createFileRoute("/contact")({
@@ -48,22 +53,20 @@ function ContactPage() {
   const send = useServerFn(submitLead);
   const [form, setForm] = useState<LeadInput>({
     nombre: "",
-    apellido: "",
     celular: "",
     correo: "",
-    empresa: "",
     interes: "" as unknown as LeadInput["interes"],
     pais: "",
-    ciudad: "",
     mensaje: "",
-    acepta: true,
+    aceptaTerminos: false,
+    aceptaPrivacidad: false,
     website: "",
   });
   const [extra, setExtra] = useState<Record<string, string>>({});
   const [pais, setPais] = useState("");
-  const [ciudad, setCiudad] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
+  const [savedProof, setSavedProof] = useState<ConsentAuditProof | null>(null);
 
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -87,10 +90,17 @@ function ContactPage() {
       setError("Seleccione su país.");
       return;
     }
-    if (!form.acepta) {
-      setError("Debe aceptar el tratamiento de datos personales.");
+    if (!form.aceptaTerminos) {
+      setError("Debe aceptar los Términos y Condiciones para continuar.");
       return;
     }
+    if (!form.aceptaPrivacidad) {
+      setError(
+        "Debe aceptar la Política de Privacidad y autorizar el tratamiento de sus datos personales.",
+      );
+      return;
+    }
+
     setStatus("loading");
     try {
       const detalles = solution
@@ -99,16 +109,29 @@ function ContactPage() {
             .map((f) => `${f.label}: ${extra[f.name]!.trim()}`)
             .join(" | ")
         : "";
+
+      const proof = await createConsentAuditProof({
+        email: form.correo,
+        formPath: typeof window !== "undefined" ? window.location.pathname + window.location.search : "/contact",
+        acceptedTerms: true,
+        acceptedPrivacy: true,
+      });
+
       await send({
         data: {
           ...form,
           interes,
           pais,
-          ciudad,
           solucion: solution ? solution.title : "",
           detalles,
+          consentProof: {
+            ...proof,
+            acceptedTerms: true,
+            acceptedPrivacy: true,
+          },
         },
       });
+      setSavedProof(proof);
       setStatus("success");
     } catch (err) {
       console.error(err);
@@ -120,7 +143,6 @@ function ContactPage() {
       );
     }
   }
-
 
   return (
     <div className="min-h-screen bg-navy text-white">
@@ -145,44 +167,58 @@ function ContactPage() {
       </header>
 
       <main className="mx-auto max-w-3xl px-6 py-16">
-        <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-wider text-gold">
+        <span className="eyebrow text-gold">
           <span className="dot-gold" /> {solution ? solution.eyebrow : "Diagnóstico estratégico"}
         </span>
-        <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+        <h1 className="mt-6 text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
           {solution ? (
-            <>
-              <span className="text-gold">{solution.title}</span>
-            </>
+            <span className="text-gold">{solution.title}</span>
           ) : (
             <>
               Agende su <span className="text-gold">llamada confidencial</span>
             </>
           )}
         </h1>
-        <p className="mt-4 max-w-2xl text-white/70">
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/65">
           {solution
             ? solution.intro
-            : "Complete el formulario y un asesor patrimonial lo contactará para preparar una propuesta a la medida de su perfil."}
+            : "Solicitamos únicamente los datos indispensables para asignar un especialista patrimonial a su caso."}
         </p>
 
         {status === "success" ? (
-          <div className="mt-12 rounded-2xl border border-gold/30 bg-white/5 p-10 text-center">
+          <div className="mt-12 rounded-sm border border-gold/30 bg-white/5 p-10 text-center">
             <CheckCircle2 className="mx-auto h-12 w-12 text-gold" />
-            <h2 className="mt-4 text-2xl font-bold">Solicitud recibida</h2>
-            <p className="mt-3 text-white/70">
+            <h2 className="mt-4 text-2xl font-semibold">Solicitud recibida</h2>
+            <p className="mt-3 text-sm text-white/70">
               Gracias, {form.nombre}. Le contactaremos en breve al {form.celular}.
             </p>
-            <Link
-              to="/"
-              className="btn-pill btn-gold mt-8 inline-flex"
-            >
+            {savedProof && (
+              <div className="mx-auto mt-6 max-w-lg rounded-sm border border-white/10 bg-navy p-4 text-left text-xs text-white/60">
+                <div className="flex items-center gap-2 font-semibold text-gold">
+                  <ShieldCheck className="h-4 w-4" /> Constancia de Consentimiento (Trazabilidad SIC)
+                </div>
+                <p className="mt-1.5">
+                  <strong>ID de Registro:</strong> {savedProof.consentId}
+                </p>
+                <p>
+                  <strong>Fecha y Hora (ISO):</strong> {savedProof.acceptedAtIso} ({savedProof.timezone})
+                </p>
+                <p>
+                  <strong>Versiones aceptadas:</strong> Términos ({savedProof.termsVersion}) · Privacidad ({savedProof.privacyVersion})
+                </p>
+                <p className="truncate">
+                  <strong>Huella SHA-256:</strong> {savedProof.proofHash}
+                </p>
+              </div>
+            )}
+            <Link to="/" className="btn-pill btn-gold mt-8 inline-flex">
               Volver al inicio
             </Link>
           </div>
         ) : (
           <form
             onSubmit={onSubmit}
-            className="mt-10 space-y-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8"
+            className="mt-10 space-y-5 rounded-sm border border-white/10 bg-white/[0.03] p-6 md:p-8"
           >
             <div className="hidden" aria-hidden="true">
               <label>
@@ -198,25 +234,28 @@ function ContactPage() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              <Field label="Nombre *">
+              <Field label="Nombre completo *">
                 <input
                   required
-                  maxLength={80}
+                  maxLength={120}
+                  placeholder="Nombre y apellido"
                   value={form.nombre}
                   onChange={(e) => update("nombre", e.target.value)}
                   className={inputCls}
                 />
               </Field>
-              <Field label="Apellido *">
+              <Field label="Correo electrónico *">
                 <input
                   required
-                  maxLength={80}
-                  value={form.apellido}
-                  onChange={(e) => update("apellido", e.target.value)}
+                  type="email"
+                  maxLength={120}
+                  placeholder="nombre@empresa.com"
+                  value={form.correo}
+                  onChange={(e) => update("correo", e.target.value)}
                   className={inputCls}
                 />
               </Field>
-              <Field label="Celular *">
+              <Field label="Celular / WhatsApp *">
                 <input
                   required
                   type="tel"
@@ -227,32 +266,11 @@ function ContactPage() {
                   className={inputCls}
                 />
               </Field>
-              <Field label="Correo electrónico *">
-                <input
-                  required
-                  type="email"
-                  maxLength={120}
-                  value={form.correo}
-                  onChange={(e) => update("correo", e.target.value)}
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="Empresa o Inmobiliaria">
-                <input
-                  maxLength={120}
-                  value={form.empresa ?? ""}
-                  onChange={(e) => update("empresa", e.target.value)}
-                  className={inputCls}
-                />
-              </Field>
-              <Field label="País *">
+              <Field label="País de residencia o inversión *">
                 <select
                   required
                   value={pais}
-                  onChange={(e) => {
-                    setPais(e.target.value);
-                    setCiudad("");
-                  }}
+                  onChange={(e) => setPais(e.target.value)}
                   className={`${inputCls} appearance-none`}
                 >
                   <option value="" disabled>
@@ -265,23 +283,10 @@ function ContactPage() {
                   ))}
                 </select>
               </Field>
-              {pais && (
-                <Field label="Ciudad *">
-                  <input
-                    required
-                    maxLength={80}
-                    placeholder="Ej. Bogotá"
-                    value={ciudad}
-                    onChange={(e) => setCiudad(e.target.value)}
-                    className={inputCls}
-                  />
-                </Field>
-              )}
-
             </div>
 
             {solution ? (
-              <div className="space-y-5 rounded-xl border border-gold/25 bg-gold/[0.05] p-5">
+              <div className="space-y-5 rounded-sm border border-gold/25 bg-gold/[0.05] p-5">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
                   Detalles de la solución
                 </div>
@@ -323,56 +328,88 @@ function ContactPage() {
                 </div>
               </div>
             ) : (
-            <Field label="Interés principal *">
-              <select
-                required
-                value={form.interes as string}
-                onChange={(e) =>
-                  update("interes", e.target.value as LeadInput["interes"])
-                }
-                className={`${inputCls} appearance-none`}
-              >
-                <option value="" disabled>
-                  Seleccione una opción…
-                </option>
-                {INTERESES.map((i) => (
-                  <option key={i} value={i} className="bg-navy text-white">
-                    {i}
+              <Field label="Interés principal *">
+                <select
+                  required
+                  value={form.interes as string}
+                  onChange={(e) =>
+                    update("interes", e.target.value as LeadInput["interes"])
+                  }
+                  className={`${inputCls} appearance-none`}
+                >
+                  <option value="" disabled>
+                    Seleccione una opción…
                   </option>
-                ))}
-              </select>
-            </Field>
+                  {INTERESES.map((i) => (
+                    <option key={i} value={i} className="bg-navy text-white">
+                      {i}
+                    </option>
+                  ))}
+                </select>
+              </Field>
             )}
 
             <Field
-              label={`Mensaje (${(form.mensaje ?? "").length}/${MAX_MESSAGE})`}
+              label={`Objetivo patrimonial (opcional — ${(form.mensaje ?? "").length}/${MAX_MESSAGE})`}
             >
               <textarea
-                rows={4}
+                rows={3}
                 maxLength={MAX_MESSAGE}
                 value={form.mensaje ?? ""}
                 onChange={(e) => update("mensaje", e.target.value)}
                 className={`${inputCls} resize-none`}
-                placeholder="Cuéntenos brevemente su objetivo patrimonial…"
+                placeholder="Breve contexto sobre su horizonte o criterio de inversión…"
               />
             </Field>
 
-            <label className="flex items-start gap-3 text-sm text-white/80">
-              <input
-                type="checkbox"
-                required
-                checked={form.acepta}
-                onChange={(e) => update("acepta", e.target.checked as true)}
-                className="mt-1 h-4 w-4 accent-gold"
-              />
-              <span>
-                Acepto el tratamiento de mis datos personales conforme a la política de
-                privacidad y la Ley de Habeas Data. *
-              </span>
-            </label>
+            {/* Dos casillas separadas y desmarcadas por defecto — Cumplimiento SIC / Ley 1581 de 2012 */}
+            <div className="space-y-3 rounded-sm border border-white/10 bg-white/[0.02] p-4">
+              <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-white/80">
+                <input
+                  type="checkbox"
+                  required
+                  checked={form.aceptaTerminos}
+                  onChange={(e) => update("aceptaTerminos", e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+                />
+                <span>
+                  Acepto los{" "}
+                  <Link
+                    to="/terminos"
+                    target="_blank"
+                    className="font-medium text-gold underline underline-offset-2 hover:text-white"
+                  >
+                    términos y condiciones
+                  </Link>{" "}
+                  de Selemma Investments (versión {LEGAL_VERSIONS.terms}). *
+                </span>
+              </label>
+
+              <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-white/80">
+                <input
+                  type="checkbox"
+                  required
+                  checked={form.aceptaPrivacidad}
+                  onChange={(e) => update("aceptaPrivacidad", e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+                />
+                <span>
+                  Acepto la{" "}
+                  <Link
+                    to="/privacidad"
+                    target="_blank"
+                    className="font-medium text-gold underline underline-offset-2 hover:text-white"
+                  >
+                    política de privacidad
+                  </Link>{" "}
+                  y autorizo de manera previa, expresa e informada el tratamiento de mis datos
+                  personales conforme a la Ley 1581 de 2012 (versión {LEGAL_VERSIONS.privacy}). *
+                </span>
+              </label>
+            </div>
 
             {error && (
-              <div className="rounded-lg border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-200">
+              <div className="rounded-sm border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-200">
                 {error}
               </div>
             )}
@@ -384,7 +421,7 @@ function ContactPage() {
             >
               {status === "loading" ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> Enviando…
+                  <Loader2 className="h-4 w-4 animate-spin" /> Registrando consentimiento y enviando…
                 </>
               ) : (
                 "Agendar diagnóstico"
@@ -398,7 +435,7 @@ function ContactPage() {
 }
 
 const inputCls =
-  "w-full rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-gold focus:bg-white/[0.07]";
+  "w-full rounded-sm border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-gold focus:bg-white/[0.07]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

@@ -1,7 +1,8 @@
-import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
+import { createConsentAuditProof, LEGAL_VERSIONS } from "@/lib/consent-audit";
 
 function safeNext(value: unknown): string {
   if (typeof value !== "string") return "/";
@@ -39,6 +40,8 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
+  const [aceptaPrivacidad, setAceptaPrivacidad] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -60,10 +63,11 @@ function LoginPage() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setBusy(true);
     setError(null);
     setInfo(null);
+
     if (mode === "signin") {
+      setBusy(true);
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
       if (error) return setError(error.message);
@@ -71,15 +75,38 @@ function LoginPage() {
       go();
       return;
     }
+
+    if (!aceptaTerminos) {
+      return setError("Debe aceptar los Términos y Condiciones para registrarse.");
+    }
+    if (!aceptaPrivacidad) {
+      return setError("Debe aceptar la Política de Privacidad para registrarse.");
+    }
+
+    setBusy(true);
+    const proof = await createConsentAuditProof({
+      email,
+      formPath: "/login#signup",
+      acceptedTerms: true,
+      acceptedPrivacy: true,
+    });
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: `${window.location.origin}/login?next=${encodeURIComponent(next)}` },
+      options: {
+        emailRedirectTo: `${window.location.origin}/login?next=${encodeURIComponent(next)}`,
+        data: {
+          sic_consent_proof: proof,
+        },
+      },
     });
     setBusy(false);
     if (error) return setError(error.message);
     if (!data.session) {
-      setInfo("Revisa tu correo para confirmar la cuenta y luego vuelve a iniciar sesión.");
+      setInfo(
+        `Revisa tu correo para confirmar la cuenta. ID de consentimiento SIC: ${proof.consentId}.`,
+      );
       return;
     }
     go();
@@ -87,6 +114,11 @@ function LoginPage() {
 
   async function onGoogle() {
     setError(null);
+    if (mode === "signup" && (!aceptaTerminos || !aceptaPrivacidad)) {
+      return setError(
+        "Marque las dos casillas de Términos y Política de Privacidad antes de crear su cuenta.",
+      );
+    }
     const result = await lovable.auth.signInWithOAuth("google", {
       redirect_uri: `${window.location.origin}/login?next=${encodeURIComponent(next)}`,
     });
@@ -96,34 +128,34 @@ function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-4 py-16">
-      <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-8">
-        <h1 className="text-xl font-semibold text-foreground">
+    <main className="flex min-h-screen items-center justify-center bg-navy px-4 py-16 text-white">
+      <div className="w-full max-w-md rounded-sm border border-white/10 bg-white/[0.03] p-8">
+        <h1 className="text-xl font-semibold text-white">
           {mode === "signin" ? "Iniciar sesión" : "Crear cuenta"}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Accede para autorizar integraciones con Selemma Investments.
+        <p className="mt-2 text-xs text-white/60">
+          Accede para autorizar integraciones y gestionar tus solicitudes con Selemma Investments.
         </p>
 
         <button
           onClick={onGoogle}
-          className="mt-6 w-full rounded-full border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+          className="mt-6 w-full rounded-sm border border-white/15 bg-white/5 px-4 py-2.5 text-xs font-medium text-white transition-colors hover:border-gold/40 hover:bg-white/10"
         >
           Continuar con Google
         </button>
 
-        <div className="my-5 text-center text-xs uppercase tracking-widest text-muted-foreground">
+        <div className="my-5 text-center text-[11px] uppercase tracking-widest text-white/40">
           o
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-3">
+        <form onSubmit={onSubmit} className="space-y-3.5">
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Correo"
-            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground"
+            placeholder="Correo electrónico"
+            className="w-full rounded-sm border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
           />
           <input
             type="password"
@@ -132,28 +164,78 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
-            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground"
+            className="w-full rounded-sm border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
           />
+
+          {mode === "signup" && (
+            <div className="space-y-2.5 rounded-sm border border-white/10 bg-white/[0.02] p-3.5 text-xs text-white/80">
+              <label className="flex cursor-pointer items-start gap-2.5">
+                <input
+                  type="checkbox"
+                  required
+                  checked={aceptaTerminos}
+                  onChange={(e) => setAceptaTerminos(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+                />
+                <span>
+                  Acepto los{" "}
+                  <Link
+                    to="/terminos"
+                    target="_blank"
+                    className="font-medium text-gold underline underline-offset-2 hover:text-white"
+                  >
+                    términos y condiciones
+                  </Link>{" "}
+                  ({LEGAL_VERSIONS.terms}). *
+                </span>
+              </label>
+
+              <label className="flex cursor-pointer items-start gap-2.5">
+                <input
+                  type="checkbox"
+                  required
+                  checked={aceptaPrivacidad}
+                  onChange={(e) => setAceptaPrivacidad(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+                />
+                <span>
+                  Acepto la{" "}
+                  <Link
+                    to="/privacidad"
+                    target="_blank"
+                    className="font-medium text-gold underline underline-offset-2 hover:text-white"
+                  >
+                    política de privacidad
+                  </Link>{" "}
+                  y el tratamiento de mis datos personales ({LEGAL_VERSIONS.privacy}). *
+                </span>
+              </label>
+            </div>
+          )}
+
           {error && (
-            <p role="alert" className="text-sm text-destructive">
+            <p role="alert" className="text-xs text-red-300">
               {error}
             </p>
           )}
-          {info && <p className="text-sm text-muted-foreground">{info}</p>}
+          {info && <p className="text-xs text-gold">{info}</p>}
           <button
             type="submit"
             disabled={busy}
-            className="w-full rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-60"
+            className="btn-pill btn-gold w-full justify-center disabled:opacity-60"
           >
             {busy ? "Procesando…" : mode === "signin" ? "Entrar" : "Registrarme"}
           </button>
         </form>
 
         <button
-          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-          className="mt-4 w-full text-center text-xs text-muted-foreground underline"
+          onClick={() => {
+            setMode(mode === "signin" ? "signup" : "signin");
+            setError(null);
+          }}
+          className="mt-4 w-full text-center text-xs text-white/60 underline hover:text-gold"
         >
-          {mode === "signin" ? "No tengo cuenta" : "Ya tengo cuenta"}
+          {mode === "signin" ? "No tengo cuenta · Crear cuenta" : "Ya tengo cuenta · Iniciar sesión"}
         </button>
       </div>
     </main>

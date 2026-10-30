@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as ReembolsosRouteImport } from './routes/reembolsos'
+import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -28,6 +32,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -36,6 +45,21 @@ const LoginRoute = LoginRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReembolsosRoute = ReembolsosRouteImport.update({
+  id: '/reembolsos',
+  path: '/reembolsos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminosRoute = TerminosRouteImport.update({
+  id: '/terminos',
+  path: '/terminos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -65,8 +89,12 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/reembolsos': typeof ReembolsosRoute
+  '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -75,8 +103,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/reembolsos': typeof ReembolsosRoute
+  '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -86,8 +118,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/reembolsos': typeof ReembolsosRoute
+  '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -98,8 +134,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contact'
+    | '/cookies'
     | '/login'
     | '/mcp'
+    | '/privacidad'
+    | '/reembolsos'
+    | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/.lovable/oauth/consent'
@@ -108,8 +148,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/contact'
+    | '/cookies'
     | '/login'
     | '/mcp'
+    | '/privacidad'
+    | '/reembolsos'
+    | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/.lovable/oauth/consent'
@@ -118,8 +162,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/contact'
+    | '/cookies'
     | '/login'
     | '/mcp'
+    | '/privacidad'
+    | '/reembolsos'
+    | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/.lovable/oauth/consent'
@@ -129,8 +177,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
+  PrivacidadRoute: typeof PrivacidadRoute
+  ReembolsosRoute: typeof ReembolsosRoute
+  TerminosRoute: typeof TerminosRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -153,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -165,6 +224,27 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reembolsos': {
+      id: '/reembolsos'
+      path: '/reembolsos'
+      fullPath: '/reembolsos'
+      preLoaderRoute: typeof ReembolsosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminos': {
+      id: '/terminos'
+      path: '/terminos'
+      fullPath: '/terminos'
+      preLoaderRoute: typeof TerminosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -201,8 +281,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
+  PrivacidadRoute: PrivacidadRoute,
+  ReembolsosRoute: ReembolsosRoute,
+  TerminosRoute: TerminosRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,

@@ -478,11 +478,32 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-[11px] text-white/35">
-          <div>© {new Date().getFullYear()} Selemma Investments.</div>
-          <div className="flex items-center gap-5">
-            <a href="#" className="hover:text-gold">Privacidad</a>
-            <a href="#" className="hover:text-gold">Términos</a>
+        <div className="mt-6 border-t border-white/10 pt-6 text-[11px] leading-relaxed text-white/35">
+          <p className="mb-4 max-w-4xl">
+            <strong>Aviso Legal y Regulatorio (Colombia, EE.UU. e Internacional):</strong> La
+            información publicada por Selemma Investments tiene fines estrictamente informativos e
+            institucionales sobre consultoría y estructuración inmobiliaria privada. No constituye
+            oferta pública de valores ni captación masiva de recursos (Decreto 2555 de 2010
+            Colombia / U.S. Securities Act of 1933). Las marcas nominativas citadas en el
+            ecosistema pertenecen a sus respectivos titulares y se mencionan con fines meramente
+            referenciales del sector.
+          </p>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>© {new Date().getFullYear()} Selemma Investments · Todos los derechos reservados.</div>
+            <div className="flex flex-wrap items-center gap-5">
+              <Link to="/terminos" className="hover:text-gold">
+                Términos y Condiciones
+              </Link>
+              <Link to="/privacidad" className="hover:text-gold">
+                Política de Privacidad (Habeas Data)
+              </Link>
+              <Link to="/cookies" className="hover:text-gold">
+                Política de Cookies
+              </Link>
+              <Link to="/reembolsos" className="hover:text-gold">
+                Política de Reembolso y Retracto
+              </Link>
+            </div>
           </div>
         </div>
       </div>
