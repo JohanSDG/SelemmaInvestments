@@ -22,6 +22,7 @@ import warehouseImg from "@/assets/warehouse.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import { RotatingGlobe } from "@/components/RotatingGlobe";
 import { BrandCarousel } from "@/components/BrandCarousel";
+import InversionAlternativa from "@/components/InversionAlternativa";
 
 export const Route = createFileRoute("/")({
   component: SelemmaHome,
@@ -50,6 +51,7 @@ function SelemmaHome() {
     <div className="min-h-screen bg-navy text-white">
       <Nav />
       <Hero />
+      <InversionAlternativa />
       <BrandCarousel />
       <ValueProps />
       <Solutions />
@@ -63,6 +65,7 @@ function SelemmaHome() {
 
 function Nav() {
   const links = [
+    { label: "Servicios Financieros", href: "#servicios-financieros" },
     { label: "Soluciones", href: "#soluciones" },
     { label: "Diferenciadores", href: "#diferenciadores" },
     { label: "Inversionistas", href: "#inversores" },
