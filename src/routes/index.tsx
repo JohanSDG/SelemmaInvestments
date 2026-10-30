@@ -76,16 +76,15 @@ function Hero() {
 
       <div className="relative mx-auto max-w-6xl px-6">
         <span className="eyebrow text-gold">
-          <span className="dot-gold" /> SELEMMA INVESTMENTS · LATAM &amp; USA
+          <span className="dot-gold" /> SELEMMA INVESTMENTS
         </span>
         <h1 className="mt-7 max-w-3xl text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-white sm:text-[42px] lg:text-[52px]">
-          Inversión inmobiliaria.
-          <span className="mt-1 block text-gold">Criterio para su patrimonio.</span>
+          Tu Inversión
+          <span className="mt-1 block text-gold">con criterio para su patrimonio.</span>
         </h1>
         <p className="mt-6 max-w-xl text-[14px] leading-[1.7] text-white/60 md:text-[15px]">
-          Su objetivo es el punto de partida. Conectamos capital privado con activos
-          off-market mediante análisis financiero, estrategia fiscal y acompañamiento
-          integral.
+          Conectamos capital privado con activos off-market mediante análisis financiero,
+          estrategia fiscal y acompañamiento integral.
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-3.5">
           <Link to="/contact" className="btn-pill btn-gold">
