@@ -44,6 +44,13 @@ export function Nav() {
           >
             Servicios Financieros
           </Link>
+          <Link
+            to="/nosotros"
+            activeProps={{ className: "text-[13px] font-semibold text-gold" }}
+            inactiveProps={{ className: "text-[13px] text-white/70 transition hover:text-white" }}
+          >
+            Nosotros
+          </Link>
           {links.map((l) => (
             <a
               key={l.href}
@@ -92,6 +99,11 @@ export function Footer() {
           <div>
             <div className="text-[10px] uppercase tracking-[0.25em] text-white/35">Compañía</div>
             <ul className="mt-4 space-y-2 text-[13px]">
+              <li>
+                <Link to="/nosotros" className="hover:text-gold">
+                  Nosotros
+                </Link>
+              </li>
               <li>
                 <a href="/#soluciones" className="hover:text-gold">
                   Soluciones

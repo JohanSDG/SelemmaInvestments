@@ -168,9 +168,9 @@ function ContactPage() {
     try {
       const detalles = solution
         ? solution.fields
-            .filter((f) => extra[f.name]?.trim())
-            .map((f) => `${f.label}: ${extra[f.name]!.trim()}`)
-            .join(" | ")
+          .filter((f) => extra[f.name]?.trim())
+          .map((f) => `${f.label}: ${extra[f.name]!.trim()}`)
+          .join(" | ")
         : "";
 
       const proof = await createConsentAuditProof({
@@ -360,12 +360,11 @@ function ContactPage() {
                   </span>
                   {selectedCountry && (
                     <span
-                      className={`shrink-0 font-semibold ${
-                        phoneDigits.length >= selectedCountry.minDigits &&
-                        phoneDigits.length <= selectedCountry.maxDigits
+                      className={`shrink-0 font-semibold ${phoneDigits.length >= selectedCountry.minDigits &&
+                          phoneDigits.length <= selectedCountry.maxDigits
                           ? "text-gold"
                           : "text-white/45"
-                      }`}
+                        }`}
                     >
                       {phoneDigits.length}/{selectedCountry.maxDigits} dígitos
                     </span>
@@ -417,11 +416,10 @@ function ContactPage() {
                             setSelectedSlug(opt.slug);
                             setExtra({});
                           }}
-                          className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold transition ${
-                            active
+                          className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold transition ${active
                               ? "border-gold bg-gold text-navy"
                               : "border-white/15 bg-white/4 text-white/70 hover:border-gold/40 hover:text-white"
-                          }`}
+                            }`}
                         >
                           {opt.label}
                         </button>

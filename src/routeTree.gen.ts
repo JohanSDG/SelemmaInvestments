@@ -14,6 +14,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as NosotrosRouteImport } from './routes/nosotros'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ReembolsosRouteImport } from './routes/reembolsos'
 import { Route as ServiciosFinancierosRouteImport } from './routes/servicios-financieros'
@@ -46,6 +47,11 @@ const LoginRoute = LoginRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NosotrosRoute = NosotrosRouteImport.update({
+  id: '/nosotros',
+  path: '/nosotros',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacidadRoute = PrivacidadRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/nosotros': typeof NosotrosRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
   '/servicios-financieros': typeof ServiciosFinancierosRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/nosotros': typeof NosotrosRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
   '/servicios-financieros': typeof ServiciosFinancierosRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/nosotros': typeof NosotrosRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
   '/servicios-financieros': typeof ServiciosFinancierosRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/login'
     | '/mcp'
+    | '/nosotros'
     | '/privacidad'
     | '/reembolsos'
     | '/servicios-financieros'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/login'
     | '/mcp'
+    | '/nosotros'
     | '/privacidad'
     | '/reembolsos'
     | '/servicios-financieros'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/login'
     | '/mcp'
+    | '/nosotros'
     | '/privacidad'
     | '/reembolsos'
     | '/servicios-financieros'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
+  NosotrosRoute: typeof NosotrosRoute
   PrivacidadRoute: typeof PrivacidadRoute
   ReembolsosRoute: typeof ReembolsosRoute
   ServiciosFinancierosRoute: typeof ServiciosFinancierosRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nosotros': {
+      id: '/nosotros'
+      path: '/nosotros'
+      fullPath: '/nosotros'
+      preLoaderRoute: typeof NosotrosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacidad': {
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
+  NosotrosRoute: NosotrosRoute,
   PrivacidadRoute: PrivacidadRoute,
   ReembolsosRoute: ReembolsosRoute,
   ServiciosFinancierosRoute: ServiciosFinancierosRoute,
