@@ -29,18 +29,18 @@ const InversionAlternativa = () => {
   return (
     <section id="servicios-financieros" className="w-full py-16 bg-white">
       {/* Encabezado Superior */}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-gray-900 mb-2">
+      <div className="text-center mb-14">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
           Diversificación y Refugio de <span className="font-extrabold">Capital</span>
         </h2>
-        <p className="text-lg text-gray-600">Materias Preciosas</p>
+        <p className="text-base text-gray-600">Materias Preciosas</p>
       </div>
 
-      {/* Contenedor Principal con superposición */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex flex-col lg:flex-row items-center">
-          {/* Video de fondo (Izquierda) cortado a 8s en bucle continuo */}
-          <div className="w-full lg:w-3/5 h-[500px] relative z-0 overflow-hidden rounded-lg shadow-md bg-black">
+      {/* Contenedor Principal compacto y elegante con superposición */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 relative">
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          {/* Video de fondo (Izquierda) en proporción elegante y borde resaltado */}
+          <div className="w-full lg:w-[430px] h-[360px] md:h-[430px] shrink-0 relative z-0 overflow-hidden rounded-sm bg-black border-2 border-[#C8A96A]/65 ring-1 ring-gray-900/10 shadow-[0_12px_32px_rgba(0,0,0,0.15)]">
             <video
               ref={videoRef}
               src={londonDeVideo}
@@ -60,17 +60,17 @@ const InversionAlternativa = () => {
                 vid.currentTime = 0;
                 void vid.play().catch(() => {});
               }}
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Tarjeta superpuesta (Derecha) */}
-          <div className="w-full lg:w-1/2 bg-white p-10 md:p-14 shadow-2xl rounded-sm z-10 lg:-ml-32 mt-8 lg:mt-0 border border-gray-100">
-            <h3 className="text-3xl text-gray-900 mb-6 font-medium">
+          {/* Tarjeta superpuesta (Derecha) con borde definido y sombra elegante */}
+          <div className="w-full lg:w-[540px] bg-white p-8 md:p-11 rounded-sm z-10 lg:-ml-16 mt-6 lg:mt-0 border border-gray-200 shadow-[0_14px_45px_rgba(15,23,42,0.12)]">
+            <h3 className="text-2xl md:text-[26px] text-gray-900 mb-5 font-medium tracking-tight">
               Pagaré <span className="font-bold">Renta Fija en Oro</span>
             </h3>
 
-            <div className="space-y-5 text-gray-700 text-sm leading-relaxed">
+            <div className="space-y-4 text-gray-700 text-[13.5px] leading-relaxed">
               <p>
                 En un entorno económico de inflación persistente e incertidumbre geopolítica, el oro y los metales preciosos siguen siendo uno de los activos más resilientes y líquidos del mundo para proteger su capital.
               </p>
@@ -86,7 +86,7 @@ const InversionAlternativa = () => {
               href="https://wa.me/573024700970?text=%C2%A1Hola!%20Quiero%20conocer%20m%C3%A1s%20sobre%20las%20opciones%20de%20London%20De"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-block bg-[#002B5B] hover:bg-[#001A38] text-white font-semibold py-3 px-8 rounded-sm transition duration-300"
+              className="mt-7 inline-block bg-[#002B5B] hover:bg-[#001A38] text-white text-xs font-semibold py-3 px-7 rounded-sm shadow-sm transition duration-300"
             >
               Agendar Asesoría
             </a>
