@@ -238,27 +238,42 @@ function Differentiators() {
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <article className="card-light overflow-hidden">
-            <img
-              src={warehouseImg}
-              alt="Bodegas industriales financiadas al 0% de interés"
-              className="h-44 w-full object-cover"
-              loading="lazy"
-              width={1400}
-              height={1000}
-            />
-            <div className="p-7">
-              <div className="flex items-center gap-2 text-gold">
-                <Percent className="h-4 w-4" />
-                <span className="text-[10px] uppercase tracking-[0.2em]">Único en el mercado</span>
+          <article className="card-light flex flex-col justify-between overflow-hidden">
+            <div>
+              <img
+                src={warehouseImg}
+                alt="Comunidad Privada de Inversionistas"
+                className="h-44 w-full object-cover"
+                loading="lazy"
+                width={1400}
+                height={1000}
+              />
+              <div className="p-7 pb-4">
+                <div className="flex items-center gap-2 text-gold">
+                  <Percent className="h-4 w-4" />
+                  <span className="text-[10px] uppercase tracking-[0.2em]">CÍRCULO EXCLUSIVO</span>
+                </div>
+                <h3 className="mt-3 text-[17px] font-medium leading-snug">
+                  Comunidad Privada de Inversionistas
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-navy/65">
+                  Acceso directo a un espacio selecto con reportes semanales del mercado
+                  inmobiliario y activos emergentes. Analizamos tendencias locales y globales para
+                  anticipar cambios y acercarle oportunidades de alto potencial antes de que lleguen
+                  al mercado abierto.
+                </p>
               </div>
-              <h3 className="mt-3 text-[17px] font-medium leading-snug">
-                Financiación de Construcciones y Bodegas Industriales
-              </h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-navy/65">
-                Sin intereses y licencias de construcción gratis, eliminando sobrecostos
-                bancarios.
-              </p>
+            </div>
+            <div className="px-7 pb-7 pt-2">
+              <a
+                href="https://chat.whatsapp.com/JwT48Rewr2C5IwmSClJLlE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-pill btn-gold w-full justify-center text-xs"
+              >
+                Unirse al Grupo Selecto
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
             </div>
           </article>
 
@@ -266,15 +281,18 @@ function Differentiators() {
             <div>
               <div className="flex items-center gap-2 text-gold">
                 <Cpu className="h-4 w-4" />
-                <span className="text-[10px] uppercase tracking-[0.2em]">Plataforma IA</span>
+                <span className="text-[10px] uppercase tracking-[0.2em]">
+                  TECNOLOGÍA &amp; CRITERIO
+                </span>
               </div>
-              <h3 className="mt-3 text-[17px] font-medium">Inteligencia artificial aplicada</h3>
+              <h3 className="mt-3 text-[17px] font-medium">
+                Inteligencia Predictiva de Ubicación
+              </h3>
               <p className="mt-2 text-[13px] leading-relaxed text-white/60">
-                Precisión técnica y sistematización del{" "}
-                <span className="font-semibold text-gold">70%</span> del ciclo de venta.
-                No esperamos a que lleguen los compradores: nuestra tecnología rastrea, perfila
-                y contacta directamente a fondos e inversores de alto nivel validados para su
-                proyecto.
+                Evaluamos el entorno de su próxima inversión mediante análisis avanzado: proyección
+                de valorización, estilo de vida del sector, dinámica comercial y puntos clave. Le
+                entregamos un diagnóstico claro y transparente con la probabilidad real de éxito
+                frente al riesgo, permitiéndole decidir con total certeza.
               </p>
             </div>
           </article>
@@ -282,7 +300,7 @@ function Differentiators() {
           <article className="card-light overflow-hidden">
             <img
               src={hotelImg}
-              alt="Zonas de privilegio fiscal en LATAM y USA"
+              alt="Beneficios e Incentivos Fiscales"
               className="h-44 w-full object-cover"
               loading="lazy"
               width={1400}
@@ -291,12 +309,15 @@ function Differentiators() {
             <div className="p-7">
               <div className="flex items-center gap-2 text-gold">
                 <MapPinned className="h-4 w-4" />
-                <span className="text-[10px] uppercase tracking-[0.2em]">Ubicación &amp; fiscalidad</span>
+                <span className="text-[10px] uppercase tracking-[0.2em]">
+                  OPTIMIZACIÓN PATRIMONIAL
+                </span>
               </div>
-              <h3 className="mt-3 text-[17px] font-medium">Zonas de privilegio fiscal</h3>
+              <h3 className="mt-3 text-[17px] font-medium">Beneficios e Incentivos Fiscales</h3>
               <p className="mt-2 text-[13px] leading-relaxed text-navy/65">
-                Zonas de alto crecimiento con beneficios tributarios: valorización rápida y cargas
-                fiscales reducidas legalmente.
+                Estructuramos cada adquisición para aprovechar al máximo las ventajas tributarias y
+                los incentivos legales según la ubicación del activo y su residencia. Protegemos y
+                optimizamos su capital para que cada inversión rinda a su máxima capacidad.
               </p>
             </div>
           </article>
