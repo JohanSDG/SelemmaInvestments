@@ -271,7 +271,7 @@ function Differentiators() {
                 rel="noopener noreferrer"
                 className="btn-pill btn-gold w-full justify-center text-xs"
               >
-                Unirse al Grupo Selecto
+                Unirse al grupo
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             </div>
