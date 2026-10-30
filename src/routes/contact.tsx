@@ -10,7 +10,9 @@ import {
   LEGAL_VERSIONS,
   type ConsentAuditProof,
 } from "@/lib/consent-audit";
-import selemmaLogo from "@/assets/selemma-logo.jpeg";
+import selemmaLogo1x from "@/assets/selemma-logo-128.png";
+import selemmaLogo2x from "@/assets/selemma-logo-256.png";
+import selemmaLogo3x from "@/assets/selemma-logo-hq.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -149,8 +151,13 @@ function ContactPage() {
       <header className="border-b border-white/10">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-              <img src={selemmaLogo} alt="Selemma" className="h-10 w-10 object-cover" />
+            <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
+              <img
+                src={selemmaLogo2x}
+                srcSet={`${selemmaLogo1x} 1x, ${selemmaLogo2x} 2x, ${selemmaLogo3x} 3x`}
+                alt="Selemma"
+                className="h-full w-full object-contain"
+              />
             </div>
             <div>
               <div className="text-sm font-bold tracking-[0.18em]">SELEMMA</div>

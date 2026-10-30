@@ -15,7 +15,9 @@ import {
 } from "lucide-react";
 
 
-import selemmaLogo from "@/assets/selemma-logo.jpeg";
+import selemmaLogo1x from "@/assets/selemma-logo-128.png";
+import selemmaLogo2x from "@/assets/selemma-logo-256.png";
+import selemmaLogo3x from "@/assets/selemma-logo-hq.png";
 import warehouseImg from "@/assets/warehouse.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import { RotatingGlobe } from "@/components/RotatingGlobe";
@@ -69,8 +71,13 @@ function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-            <img src={selemmaLogo} alt="Selemma Investments" className="h-10 w-10 object-cover" />
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
+            <img
+              src={selemmaLogo2x}
+              srcSet={`${selemmaLogo1x} 1x, ${selemmaLogo2x} 2x, ${selemmaLogo3x} 3x`}
+              alt="Selemma Investments"
+              className="h-full w-full object-contain"
+            />
           </div>
           <div className="leading-tight">
             <div className="text-[11px] font-semibold tracking-[0.26em] text-white">SELEMMA</div>
@@ -419,8 +426,13 @@ function Footer() {
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-                <img src={selemmaLogo} alt="Selemma Investments" className="h-10 w-10 object-cover" />
+              <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
+                <img
+                  src={selemmaLogo2x}
+                  srcSet={`${selemmaLogo1x} 1x, ${selemmaLogo2x} 2x, ${selemmaLogo3x} 3x`}
+                  alt="Selemma Investments"
+                  className="h-full w-full object-contain"
+                />
               </div>
               <div>
                 <div className="text-[11px] font-semibold tracking-[0.32em] text-white">SELEMMA</div>

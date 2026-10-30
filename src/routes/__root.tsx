@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import selemmaLogo from "@/assets/selemma-logo.jpeg?url";
+import selemmaLogo from "@/assets/selemma-logo-256.png?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 
@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: selemmaLogo, type: "image/jpeg" },
+      { rel: "icon", href: selemmaLogo, type: "image/png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
