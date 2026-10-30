@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import goldBullionImg from "@/assets/gold-bullion.jpg";
 
 const InversionAlternativa = () => {
   return (
@@ -14,23 +15,21 @@ const InversionAlternativa = () => {
       {/* Contenedor Principal con superposición */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col lg:flex-row items-center">
-          
           {/* Imagen de fondo (Izquierda) */}
           <div className="w-full lg:w-3/5 h-[500px] relative z-0">
-            {/* Reemplaza la URL por la imagen que desees usar */}
-            <img 
-              src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=2000&auto=format&fit=crop" 
-              alt="Inversión en Oro" 
+            <img
+              src={goldBullionImg}
+              alt="Inversión en Oro — London DE Group & Selemma Investments"
               className="w-full h-full object-cover rounded-lg shadow-md"
             />
           </div>
 
           {/* Tarjeta superpuesta (Derecha) */}
-          <div className="w-full lg:w-1/2 bg-white p-10 md:p-14 shadow-2xl rounded-sm z-10 lg:-ml-32 mt-8 lg:mt-0">
+          <div className="w-full lg:w-1/2 bg-white p-10 md:p-14 shadow-2xl rounded-sm z-10 lg:-ml-32 mt-8 lg:mt-0 border border-gray-100">
             <h3 className="text-3xl text-gray-900 mb-6 font-medium">
               Pagaré <span className="font-bold">Renta Fija en Oro</span>
             </h3>
-            
+
             <div className="space-y-5 text-gray-700 text-sm leading-relaxed">
               <p>
                 En un entorno económico de inflación persistente e incertidumbre geopolítica, el oro y los metales preciosos siguen siendo uno de los activos más resilientes y líquidos del mundo para proteger su capital.
@@ -52,7 +51,6 @@ const InversionAlternativa = () => {
               Agendar Asesoría
             </a>
           </div>
-          
         </div>
       </div>
     </section>
@@ -60,4 +58,3 @@ const InversionAlternativa = () => {
 };
 
 export default InversionAlternativa;
-
