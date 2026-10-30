@@ -1,5 +1,5 @@
 import React from "react";
-import goldBullionImg from "@/assets/gold-bullion.jpg";
+import londonDeVideo from "@/assets/VideoLondon_Selemma.mp4";
 
 const InversionAlternativa = () => {
   return (
@@ -15,12 +15,16 @@ const InversionAlternativa = () => {
       {/* Contenedor Principal con superposición */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col lg:flex-row items-center">
-          {/* Imagen de fondo (Izquierda) */}
-          <div className="w-full lg:w-3/5 h-[500px] relative z-0">
-            <img
-              src={goldBullionImg}
-              alt="Inversión en Oro — London DE Group & Selemma Investments"
-              className="w-full h-full object-cover rounded-lg shadow-md"
+          {/* Video de fondo (Izquierda) */}
+          <div className="w-full lg:w-3/5 h-[500px] relative z-0 overflow-hidden rounded-lg shadow-md bg-black">
+            <video
+              src={londonDeVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
 
