@@ -163,7 +163,7 @@ const solutions = [
     icon: ShieldCheck,
     title: "Representación de Usuarios",
     body:
-      "Búsqueda y negociación de espacios bajo un mandato que protege los intereses de su empresa.",
+      "Búsqueda y negociación de espacios bajo un diagnóstico que protege los intereses de su inversión hacia el futuro de su retorno.",
   },
   {
     n: "03",

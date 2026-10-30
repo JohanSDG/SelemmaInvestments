@@ -53,7 +53,7 @@ export const SOLUTIONS: Record<string, SolutionConfig> = {
     eyebrow: "Línea 02 · Representación de Usuarios",
     title: "Representación de Usuarios",
     intro:
-      "Búsqueda y negociación de espacios bajo un mandato que protege los intereses de su empresa.",
+      "Búsqueda y negociación de espacios bajo un diagnóstico que protege los intereses de su inversión hacia el futuro de su retorno.",
     interes: "Alquilar oficina/espacio",
     fields: [
       {
