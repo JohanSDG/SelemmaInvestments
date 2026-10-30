@@ -20,3 +20,4 @@ Este documento certifica la titularidad y licencias de uso comercial de todos lo
 
 5. **Iconografía (`lucide-react`)**
    - **Licencia**: ISC License (Open Source — permite uso comercial, modificación y distribución sin restricciones).
+

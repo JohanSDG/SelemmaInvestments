@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Scale } from "lucide-react";
 import type { ReactNode } from "react";
-import logoAsset from "@/assets/selemma-logo.png.asset.json";
+import selemmaLogo from "@/assets/selemma-logo.jpeg";
 
 const LEGAL_NAV = [
   { to: "/terminos", label: "Términos y Condiciones" },
@@ -31,7 +31,7 @@ export function LegalLayout({
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-              <img src={logoAsset.url} alt="Selemma Investments" className="h-10 w-10 object-cover" />
+              <img src={selemmaLogo} alt="Selemma Investments" className="h-10 w-10 object-cover" />
             </div>
             <div className="leading-tight">
               <div className="text-[11px] font-semibold tracking-[0.26em] text-white">SELEMMA</div>
@@ -112,3 +112,4 @@ export function LegalSection({
     </section>
   );
 }
+

@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 
-import logoAsset from "@/assets/selemma-logo.png.asset.json";
+import selemmaLogo from "@/assets/selemma-logo.jpeg";
 import warehouseImg from "@/assets/warehouse.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import { RotatingGlobe } from "@/components/RotatingGlobe";
@@ -70,7 +70,7 @@ function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-            <img src={logoAsset.url} alt="Selemma Investments" className="h-10 w-10 object-cover" />
+            <img src={selemmaLogo} alt="Selemma Investments" className="h-10 w-10 object-cover" />
           </div>
           <div className="leading-tight">
             <div className="text-[11px] font-semibold tracking-[0.26em] text-white">SELEMMA</div>
@@ -420,7 +420,7 @@ function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white">
-                <img src={logoAsset.url} alt="Selemma Investments" className="h-10 w-10 object-cover" />
+                <img src={selemmaLogo} alt="Selemma Investments" className="h-10 w-10 object-cover" />
               </div>
               <div>
                 <div className="text-[11px] font-semibold tracking-[0.32em] text-white">SELEMMA</div>

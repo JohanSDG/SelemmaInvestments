@@ -116,3 +116,4 @@ export async function createConsentAuditProof(params: {
 
   return proof;
 }
+
