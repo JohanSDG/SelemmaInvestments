@@ -186,12 +186,11 @@ function Solutions() {
               <span className="dot-gold" /> Tres líneas de solución
             </span>
             <h2 className="mt-6 text-[28px] font-medium leading-[1.15] tracking-[-0.02em] text-white md:text-[38px]">
-              Una perspectiva integral.
-              <span className="mt-1 block text-gold">Un mandato a su medida.</span>
+              Una solución integral
+              <span className="mt-1 block text-gold">para su decisión.</span>
             </h2>
             <p className="mt-6 max-w-sm text-[14px] leading-[1.7] text-white/55">
-              Asesoría para inversionistas, empresas y propietarios en cada etapa de su
-              decisión inmobiliaria.
+              Consultoría para inversionistas, empresas y propietarios en cada etapa.
             </p>
           </div>
 
