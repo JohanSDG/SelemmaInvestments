@@ -27,20 +27,25 @@ const InversionAlternativa = () => {
   }, []);
 
   return (
-    <section id="servicios-financieros" className="w-full py-16 bg-white">
+    <section id="servicios-financieros" className="w-full pt-10 pb-20 bg-white">
       {/* Encabezado Superior */}
-      <div className="text-center mb-14">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-3.5 py-1 mb-3 shadow-2xs">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C8A96A]" />
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8C6D32]">
+            Materias Preciosas · London DE Group
+          </p>
+        </div>
+        <h2 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight">
           Diversificación y Refugio de <span className="font-extrabold">Capital</span>
         </h2>
-        <p className="text-base text-gray-600">Materias Preciosas</p>
       </div>
 
       {/* Contenedor Principal compacto y elegante con superposición */}
       <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10 relative">
         <div className="flex flex-col lg:flex-row items-center justify-center">
           {/* Video de fondo (Izquierda) en proporción elegante y borde resaltado */}
-          <div className="w-full lg:w-[430px] h-[360px] md:h-[430px] shrink-0 relative z-0 overflow-hidden rounded-sm bg-black border-2 border-[#C8A96A]/65 ring-1 ring-gray-900/10 shadow-[0_12px_32px_rgba(0,0,0,0.15)]">
+          <div className="w-full lg:w-[430px] h-[360px] md:h-[430px] shrink-0 relative z-0 overflow-hidden rounded-sm bg-black border-2 border-[#C8A96A]/75 ring-1 ring-gray-900/15 shadow-[0_14px_36px_rgba(0,0,0,0.18)]">
             <video
               ref={videoRef}
               src={londonDeVideo}
@@ -65,7 +70,7 @@ const InversionAlternativa = () => {
           </div>
 
           {/* Tarjeta superpuesta (Derecha) con borde definido y sombra elegante */}
-          <div className="w-full lg:w-[540px] bg-white p-8 md:p-11 rounded-sm z-10 lg:-ml-16 mt-6 lg:mt-0 border border-gray-200 shadow-[0_14px_45px_rgba(15,23,42,0.12)]">
+          <div className="w-full lg:w-[540px] bg-white p-8 md:p-11 rounded-sm z-10 lg:-ml-16 mt-6 lg:mt-0 border border-gray-300/90 border-t-2 border-t-[#C8A96A] ring-1 ring-gray-900/5 shadow-[0_16px_48px_rgba(15,23,42,0.14)]">
             <h3 className="text-2xl md:text-[26px] text-gray-900 mb-5 font-medium tracking-tight">
               Pagaré <span className="font-bold">Renta Fija en Oro</span>
             </h3>
