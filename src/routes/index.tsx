@@ -22,7 +22,6 @@ import warehouseImg from "@/assets/warehouse.jpg";
 import hotelImg from "@/assets/hotel.jpg";
 import { RotatingGlobe } from "@/components/RotatingGlobe";
 import { BrandCarousel } from "@/components/BrandCarousel";
-import InversionAlternativa from "@/components/InversionAlternativa";
 
 export const Route = createFileRoute("/")({
   component: SelemmaHome,
@@ -51,7 +50,6 @@ function SelemmaHome() {
     <div className="min-h-screen bg-navy text-white">
       <Nav />
       <Hero />
-      <InversionAlternativa />
       <BrandCarousel />
       <ValueProps />
       <Solutions />
@@ -63,17 +61,16 @@ function SelemmaHome() {
   );
 }
 
-function Nav() {
+export function Nav() {
   const links = [
-    { label: "Servicios Financieros", href: "#servicios-financieros" },
-    { label: "Soluciones", href: "#soluciones" },
-    { label: "Diferenciadores", href: "#diferenciadores" },
-    { label: "Inversionistas", href: "#inversores" },
+    { label: "Soluciones", href: "/#soluciones" },
+    { label: "Diferenciadores", href: "/#diferenciadores" },
+    { label: "Inversionistas", href: "/#inversores" },
   ];
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm">
             <img
               src={selemmaLogo2x}
@@ -86,8 +83,23 @@ function Nav() {
             <div className="text-[11px] font-semibold tracking-[0.26em] text-white">SELEMMA</div>
             <div className="text-[8px] tracking-[0.32em] text-white/50">INVESTMENTS</div>
           </div>
-        </a>
+        </Link>
         <nav className="hidden items-center gap-8 md:flex">
+          <Link
+            to="/"
+            activeOptions={{ exact: true }}
+            activeProps={{ className: "text-[13px] font-semibold text-white" }}
+            inactiveProps={{ className: "text-[13px] text-white/70 transition hover:text-white" }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/servicios-financieros"
+            activeProps={{ className: "text-[13px] font-semibold text-gold" }}
+            inactiveProps={{ className: "text-[13px] text-white/70 transition hover:text-white" }}
+          >
+            Servicios Financieros
+          </Link>
           {links.map((l) => (
             <a
               key={l.href}
@@ -422,7 +434,7 @@ function CtaBlock() {
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="bg-navy pt-16 pb-8 text-white/60">
       <div className="mx-auto max-w-6xl px-6">

@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ReembolsosRouteImport } from './routes/reembolsos'
+import { Route as ServiciosFinancierosRouteImport } from './routes/servicios-financieros'
 import { Route as TerminosRouteImport } from './routes/terminos'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -57,6 +58,11 @@ const ReembolsosRoute = ReembolsosRouteImport.update({
   path: '/reembolsos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiciosFinancierosRoute = ServiciosFinancierosRouteImport.update({
+  id: '/servicios-financieros',
+  path: '/servicios-financieros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TerminosRoute = TerminosRouteImport.update({
   id: '/terminos',
   path: '/terminos',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
+  '/servicios-financieros': typeof ServiciosFinancierosRoute
   '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
+  '/servicios-financieros': typeof ServiciosFinancierosRoute
   '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/privacidad': typeof PrivacidadRoute
   '/reembolsos': typeof ReembolsosRoute
+  '/servicios-financieros': typeof ServiciosFinancierosRoute
   '/terminos': typeof TerminosRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/privacidad'
     | '/reembolsos'
+    | '/servicios-financieros'
     | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/privacidad'
     | '/reembolsos'
+    | '/servicios-financieros'
     | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/privacidad'
     | '/reembolsos'
+    | '/servicios-financieros'
     | '/terminos'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   PrivacidadRoute: typeof PrivacidadRoute
   ReembolsosRoute: typeof ReembolsosRoute
+  ServiciosFinancierosRoute: typeof ServiciosFinancierosRoute
   TerminosRoute: typeof TerminosRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReembolsosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicios-financieros': {
+      id: '/servicios-financieros'
+      path: '/servicios-financieros'
+      fullPath: '/servicios-financieros'
+      preLoaderRoute: typeof ServiciosFinancierosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terminos': {
       id: '/terminos'
       path: '/terminos'
@@ -286,6 +306,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   PrivacidadRoute: PrivacidadRoute,
   ReembolsosRoute: ReembolsosRoute,
+  ServiciosFinancierosRoute: ServiciosFinancierosRoute,
   TerminosRoute: TerminosRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
