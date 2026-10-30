@@ -22,7 +22,7 @@ export const SOLUTIONS: Record<string, SolutionConfig> = {
     eyebrow: "Línea 01 · Consultoría",
     title: "Servicio de Consultoría",
     intro:
-      "Análisis del activo, inteligencia de mercado y estructuración financiera para orientar sus decisiones patrimoniales.",
+      "Análisis de mercado, valoración y estructuración patrimonial para decisiones inmobiliarias con mayor claridad.",
     interes: "Consultoría patrimonial",
     fields: [
       {
@@ -58,7 +58,7 @@ export const SOLUTIONS: Record<string, SolutionConfig> = {
     eyebrow: "Línea 02 · Representación de Usuarios",
     title: "Representación de Usuarios",
     intro:
-      "Búsqueda de espacios y negociación de condiciones de compra o arriendo alineadas con las necesidades de su empresa.",
+      "Búsqueda y negociación de espacios bajo un mandato que protege los intereses de su empresa.",
     interes: "Alquilar oficina/espacio",
     fields: [
       {

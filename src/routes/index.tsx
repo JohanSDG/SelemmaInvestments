@@ -215,35 +215,30 @@ function ValueProps() {
 const solutions = [
   {
     n: "01",
-    slug: "consultoria",
+    to: "/contact" as const,
+    search: { s: "consultoria" },
     icon: LineChart,
     title: "Servicio de Consultoría",
     body:
-      "Análisis del activo, inteligencia de mercado y estructuración financiera para orientar sus decisiones patrimoniales.",
+      "Análisis de mercado, valoración y estructuración patrimonial para decisiones inmobiliarias con mayor claridad.",
   },
   {
     n: "02",
-    slug: "usuarios",
+    to: "/contact" as const,
+    search: { s: "usuarios" },
     icon: ShieldCheck,
     title: "Representación de Usuarios",
     body:
-      "Búsqueda de espacios y negociación de condiciones de compra o arriendo alineadas con las necesidades de su empresa.",
+      "Búsqueda y negociación de espacios bajo un mandato que protege los intereses de su empresa.",
   },
   {
     n: "03",
-    slug: "propietarios",
-    icon: Building2,
-    title: "Representación de Propietarios",
-    body:
-      "Estrategia de comercialización y negociación para posicionar su inmueble ante compradores e inquilinos adecuados.",
-  },
-  {
-    n: "04",
-    slug: "off-market",
+    to: "/servicios-financieros" as const,
+    search: undefined,
     icon: Landmark,
-    title: "Servicio de Inversión Off-Market",
+    title: "Diversificación de Portafolio",
     body:
-      "Originación, evaluación, adquisición y gestión de activos según su capital, retorno objetivo y horizonte de inversión.",
+      "Conectamos su capital con el mercado internacional de materias preciosas mediante alianzas estratégicas que garantizan seguridad y crecimiento corporativo.",
   },
 ];
 
@@ -254,7 +249,7 @@ function Solutions() {
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
             <span className="eyebrow text-gold">
-              <span className="dot-gold" /> Cuatro líneas de solución
+              <span className="dot-gold" /> Tres líneas de solución
             </span>
             <h2 className="mt-6 text-[28px] font-medium leading-[1.15] tracking-[-0.02em] text-white md:text-[38px]">
               Una perspectiva integral.
@@ -267,11 +262,11 @@ function Solutions() {
           </div>
 
           <div className="divide-y divide-white/10 border-t border-white/10 lg:col-span-7">
-            {solutions.map(({ n, slug, icon: Icon, title, body }) => (
+            {solutions.map(({ n, to, search, icon: Icon, title, body }) => (
               <Link
                 key={n}
-                to="/contact"
-                search={{ s: slug }}
+                to={to}
+                search={search}
                 className="group flex items-start gap-6 py-7 transition hover:bg-white/[0.02]"
               >
                 <span className="pt-1 text-[11px] font-medium tracking-[0.2em] text-gold/80">
