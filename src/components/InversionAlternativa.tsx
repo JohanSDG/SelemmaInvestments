@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import londonDeVideo from "@/assets/VideoLondon_Selemma.mp4";
 
+const MAX_VIDEO_SECONDS = 8;
+
 const InversionAlternativa = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleTimeCheck = () => {
+      if (video.currentTime >= MAX_VIDEO_SECONDS) {
+        video.currentTime = 0;
+        void video.play().catch(() => {});
+      }
+    };
+
+    video.addEventListener("timeupdate", handleTimeCheck);
+    const intervalId = window.setInterval(handleTimeCheck, 100);
+
+    return () => {
+      video.removeEventListener("timeupdate", handleTimeCheck);
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <section id="servicios-financieros" className="w-full py-16 bg-white">
       {/* Encabezado Superior */}
@@ -15,15 +39,27 @@ const InversionAlternativa = () => {
       {/* Contenedor Principal con superposición */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col lg:flex-row items-center">
-          {/* Video de fondo (Izquierda) */}
+          {/* Video de fondo (Izquierda) cortado a 8s en bucle continuo */}
           <div className="w-full lg:w-3/5 h-[500px] relative z-0 overflow-hidden rounded-lg shadow-md bg-black">
             <video
+              ref={videoRef}
               src={londonDeVideo}
               autoPlay
               loop
               muted
               playsInline
-              controls
+              onTimeUpdate={(e) => {
+                const vid = e.currentTarget;
+                if (vid.currentTime >= MAX_VIDEO_SECONDS) {
+                  vid.currentTime = 0;
+                  void vid.play().catch(() => {});
+                }
+              }}
+              onEnded={(e) => {
+                const vid = e.currentTarget;
+                vid.currentTime = 0;
+                void vid.play().catch(() => {});
+              }}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
