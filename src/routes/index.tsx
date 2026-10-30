@@ -106,37 +106,37 @@ function Hero() {
 
 function ValueProps() {
   return (
-    <section className="bg-silver py-28 text-navy">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
+    <section className="bg-silver py-14 md:py-16 text-navy">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
             <span className="eyebrow text-navy/55">
               <span className="dot-gold" /> Nuestra propuesta
             </span>
-            <h2 className="mt-6 text-[28px] font-medium leading-[1.15] tracking-[-0.02em] text-navy md:text-[38px]">
+            <h2 className="mt-3.5 text-[22px] font-medium leading-[1.16] tracking-[-0.02em] text-navy md:text-[30px]">
               Antes del activo,
               <br />
               la estrategia.
             </h2>
           </div>
           <div className="lg:col-span-7">
-            <p className="max-w-2xl text-[15px] leading-[1.75] text-navy/65">
+            <p className="max-w-xl text-[13.5px] leading-[1.7] text-navy/65">
               Definimos con usted el retorno objetivo, el horizonte de inversión y las
               prioridades de su patrimonio. A partir de ese mandato evaluamos
               oportunidades y estructuramos una decisión con fundamentos.
             </p>
-            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-navy/10 pt-7">
+            <div className="mt-6 grid grid-cols-3 gap-5 border-t border-navy/10 pt-5">
               <div>
-                <div className="text-[13px] font-semibold text-navy">Originación</div>
-                <div className="mt-1 text-[13px] text-navy/55">Off-market</div>
+                <div className="text-[12.5px] font-semibold text-navy">Originación</div>
+                <div className="mt-0.5 text-[12px] text-navy/55">Off-market</div>
               </div>
               <div>
-                <div className="text-[13px] font-semibold text-navy">Análisis</div>
-                <div className="mt-1 text-[13px] text-navy/55">Financiero</div>
+                <div className="text-[12.5px] font-semibold text-navy">Análisis</div>
+                <div className="mt-0.5 text-[12px] text-navy/55">Financiero</div>
               </div>
               <div>
-                <div className="text-[13px] font-semibold text-navy">Estructuración</div>
-                <div className="mt-1 text-[13px] text-navy/55">Patrimonial</div>
+                <div className="text-[12.5px] font-semibold text-navy">Estructuración</div>
+                <div className="mt-0.5 text-[12px] text-navy/55">Patrimonial</div>
               </div>
             </div>
           </div>
