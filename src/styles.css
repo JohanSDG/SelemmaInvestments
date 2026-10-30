@@ -1,0 +1,254 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Selemma Investments — Design System
+ * Palette: Navy #01081D · Gold #FFD700 · Silver Gray #F5F5F7
+ * Type: Montserrat (display + body), tight negative tracking on headlines
+ */
+
+@theme inline {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-pill: 9999px;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand-specific semantic tokens */
+  --color-navy: var(--navy);
+  --color-navy-surface: var(--navy-surface);
+  --color-gold: var(--gold);
+  --color-silver: var(--silver);
+  --color-gold-deep: var(--gold-deep);
+  --color-ink: var(--ink);
+  --color-hairline: var(--hairline);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Brand — Tech Lab: absolute black canvas, navy as elevated surface */
+  --navy: oklch(0.02 0 0);
+  /* #050505 — abyssal charcoal (canvas) */
+  --navy-surface: oklch(0.18 0.05 265);
+  /* #0A1433 — brand navy (cards/elevation) */
+
+  --gold: oklch(0.80 0.085 85);
+  /* champagne — oro sobrio institucional */
+  --gold-deep: oklch(0.66 0.075 80);
+  /* oro bruñido para hovers/detalles */
+  --silver: oklch(0.965 0.004 85);
+  /* bone — sección clara cálida */
+  --ink: oklch(0.2 0 0);
+  /* #1A1A1A */
+  --hairline: oklch(0.7 0 0 / 25%);
+
+  /* Light mode (default: white content sections) */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+  --primary: var(--navy);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0.002 250);
+  --secondary-foreground: var(--navy);
+  --muted: oklch(0.97 0.002 250);
+  --muted-foreground: oklch(0.45 0 0);
+  /* #737373-ish */
+  --accent: var(--gold);
+  --accent-foreground: var(--navy);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.1;
+  }
+}
+
+/* Utilities */
+@utility text-gold {
+  color: var(--color-gold);
+}
+
+@utility bg-navy {
+  background-color: var(--color-navy);
+}
+
+@utility bg-navy-surface {
+  background-color: var(--color-navy-surface);
+}
+
+@utility bg-silver {
+  background-color: var(--color-silver);
+}
+
+@utility text-navy {
+  color: var(--color-navy);
+}
+
+/* Whisper UI hairline border on dark cards */
+@utility card-dark {
+  background-color: var(--color-navy-surface);
+  border: 1px solid oklch(1 0 0 / 8%);
+  border-radius: var(--radius-lg);
+}
+
+@utility card-light {
+  background-color: oklch(1 0 0);
+  border: 1px solid oklch(0 0 0 / 8%);
+  border-radius: var(--radius-lg);
+}
+
+/* Institutional rectangular button */
+@utility btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 2px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+@utility btn-gold {
+  background-color: var(--color-gold);
+  color: var(--color-navy);
+
+  &:hover {
+    background-color: var(--color-gold-deep);
+    color: oklch(0.99 0 0);
+  }
+}
+
+@utility btn-dark {
+  background-color: var(--color-navy);
+  color: oklch(1 0 0);
+
+  &:hover {
+    background-color: oklch(0.14 0.04 265);
+  }
+}
+
+@utility btn-ghost-light {
+  background-color: transparent;
+  color: oklch(1 0 0);
+  border: 1px solid oklch(1 0 0 / 16%);
+
+  &:hover {
+    background-color: oklch(1 0 0 / 6%);
+    border-color: oklch(1 0 0 / 28%);
+  }
+}
+
+@utility dot-gold {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background-color: var(--color-gold);
+  opacity: 0.85;
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Infinite logo marquee */
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-x 45s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+
+/* Regla dorada fina — separador institucional */
+@utility rule-gold {
+  height: 1px;
+  width: 3.5rem;
+  background-color: var(--color-gold);
+  opacity: 0.7;
+}
