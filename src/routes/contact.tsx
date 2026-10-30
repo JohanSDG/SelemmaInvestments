@@ -405,26 +405,28 @@ function ContactPage() {
                   {[
                     { slug: "consultoria", label: "Servicio de Consultoría" },
                     { slug: "usuarios", label: "Representación de Usuarios" },
-                  ].map((opt) => {
-                    const active = selectedSlug === opt.slug;
-                    return (
-                      <button
-                        key={opt.slug}
-                        type="button"
-                        onClick={() => {
-                          setSelectedSlug(opt.slug);
-                          setExtra({});
-                        }}
-                        className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold transition ${
-                          active
-                            ? "border-gold bg-gold text-navy"
-                            : "border-white/15 bg-white/4 text-white/70 hover:border-gold/40 hover:text-white"
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    );
-                  })}
+                  ]
+                    .filter((opt) => !selectedSlug || selectedSlug === opt.slug)
+                    .map((opt) => {
+                      const active = selectedSlug === opt.slug;
+                      return (
+                        <button
+                          key={opt.slug}
+                          type="button"
+                          onClick={() => {
+                            setSelectedSlug(opt.slug);
+                            setExtra({});
+                          }}
+                          className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold transition ${
+                            active
+                              ? "border-gold bg-gold text-navy"
+                              : "border-white/15 bg-white/4 text-white/70 hover:border-gold/40 hover:text-white"
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
                 </div>
               </div>
 
