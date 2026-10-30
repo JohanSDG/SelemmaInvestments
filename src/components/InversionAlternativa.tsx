@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import londonDeVideo from "@/assets/VideoLondon_Selemma.mp4";
+import londonDeVideo from "../assets/VideoLondon_Selemma.mp4";
 
 const MAX_VIDEO_SECONDS = 8;
 

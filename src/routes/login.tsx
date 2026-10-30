@@ -1,8 +1,8 @@
 import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
-import { createConsentAuditProof, LEGAL_VERSIONS } from "@/lib/consent-audit";
+import { supabase } from "../integrations/supabase/client";
+import { lovable } from "../integrations/lovable/index";
+import { createConsentAuditProof, LEGAL_VERSIONS } from "../lib/consent-audit";
 
 function safeNext(value: unknown): string {
   if (typeof value !== "string") return "/";

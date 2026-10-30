@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LegalLayout, LegalSection } from "@/components/LegalLayout";
-import { LEGAL_VERSIONS } from "@/lib/consent-audit";
+import { LegalLayout, LegalSection } from "../components/LegalLayout";
+import { LEGAL_VERSIONS } from "../lib/consent-audit";
 
 export const Route = createFileRoute("/privacidad")({
   head: () => ({

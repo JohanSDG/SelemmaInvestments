@@ -10,11 +10,11 @@ import {
   Percent,
 } from "lucide-react";
 
-import warehouseImg from "@/assets/warehouse.jpg";
-import hotelImg from "@/assets/hotel.jpg";
-import { RotatingGlobe } from "@/components/RotatingGlobe";
-import { BrandCarousel } from "@/components/BrandCarousel";
-import { Nav, Footer } from "@/components/SiteLayout";
+import warehouseImg from "../assets/warehouse.jpg";
+import hotelImg from "../assets/hotel.jpg";
+import { RotatingGlobe } from "../components/RotatingGlobe";
+import { BrandCarousel } from "../components/BrandCarousel";
+import { Nav, Footer } from "../components/SiteLayout";
 
 export const Route = createFileRoute("/")({
   component: SelemmaHome,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
-import { LEGAL_VERSIONS } from "@/lib/consent-audit";
+import { LEGAL_VERSIONS } from "../lib/consent-audit";
 
 const STORAGE_KEY = "selemma_cookie_consent_v1";
 

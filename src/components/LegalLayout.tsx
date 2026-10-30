@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Scale } from "lucide-react";
 import type { ReactNode } from "react";
-import selemmaLogo1x from "@/assets/selemma-logo-128.png";
-import selemmaLogo2x from "@/assets/selemma-logo-256.png";
-import selemmaLogo3x from "@/assets/selemma-logo-hq.png";
+import selemmaLogo1x from "../assets/selemma-logo-128.png";
+import selemmaLogo2x from "../assets/selemma-logo-256.png";
+import selemmaLogo3x from "../assets/selemma-logo-hq.png";
 
 const LEGAL_NAV = [
   { to: "/terminos", label: "Términos y Condiciones" },

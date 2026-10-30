@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "../integrations/supabase/client";
 
 type AuthorizationDetails = {
   client?: { name?: string; client_uri?: string; redirect_uri?: string } | null;

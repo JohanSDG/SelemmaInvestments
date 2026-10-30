@@ -2,17 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
-import { submitLead, type LeadInput } from "@/lib/leads.functions";
-import { COUNTRIES, getCountryByName } from "@/lib/countries";
-import { getSolution, SOLUTIONS } from "@/lib/solutions";
+import { submitLead, type LeadInput } from "../lib/leads.functions";
+import { COUNTRIES, getCountryByName } from "../lib/countries";
+import { getSolution, SOLUTIONS } from "../lib/solutions";
 import {
   createConsentAuditProof,
   LEGAL_VERSIONS,
   type ConsentAuditProof,
-} from "@/lib/consent-audit";
-import selemmaLogo1x from "@/assets/selemma-logo-128.png";
-import selemmaLogo2x from "@/assets/selemma-logo-256.png";
-import selemmaLogo3x from "@/assets/selemma-logo-hq.png";
+} from "../lib/consent-audit";
+import selemmaLogo1x from "../assets/selemma-logo-128.png";
+import selemmaLogo2x from "../assets/selemma-logo-256.png";
+import selemmaLogo3x from "../assets/selemma-logo-hq.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

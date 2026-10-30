@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Instagram, Linkedin, Mail } from "lucide-react";
 
-import selemmaLogo1x from "@/assets/selemma-logo-128.png";
-import selemmaLogo2x from "@/assets/selemma-logo-256.png";
-import selemmaLogo3x from "@/assets/selemma-logo-hq.png";
+import selemmaLogo1x from "../assets/selemma-logo-128.png";
+import selemmaLogo2x from "../assets/selemma-logo-256.png";
+import selemmaLogo3x from "../assets/selemma-logo-hq.png";
 
 export function Nav() {
   const links = [
@@ -176,3 +176,4 @@ export function Footer() {
     </footer>
   );
 }
+

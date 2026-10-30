@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import InversionAlternativa from "@/components/InversionAlternativa";
-import financialHeroImg from "@/assets/financial-hero.jpg";
-import { Nav, Footer } from "@/components/SiteLayout";
+import InversionAlternativa from "../components/InversionAlternativa";
+import financialHeroImg from "../assets/financial-hero.jpg";
+import { Nav, Footer } from "../components/SiteLayout";
 
 export const Route = createFileRoute("/servicios-financieros")({
   head: () => ({
