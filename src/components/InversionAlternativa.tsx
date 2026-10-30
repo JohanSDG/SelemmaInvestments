@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import londonDeVideo from "@/assets/VideoLondon_Selemma.mp4";
 
 const MAX_VIDEO_SECONDS = 8;
@@ -9,6 +9,9 @@ const InversionAlternativa = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    video.muted = true;
+    void video.play().catch(() => {});
 
     const handleTimeCheck = () => {
       if (video.currentTime >= MAX_VIDEO_SECONDS) {
@@ -30,7 +33,7 @@ const InversionAlternativa = () => {
     <section id="servicios-financieros" className="w-full pt-10 pb-20 bg-white">
       {/* Encabezado Superior */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-3.5 py-1 mb-3 shadow-2xs">
+        <div className="inline-flex items-center gap-2 rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-3.5 py-1 mb-3 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-[#C8A96A]" />
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8C6D32]">
             Materias Preciosas · London DE Group
@@ -53,6 +56,7 @@ const InversionAlternativa = () => {
               loop
               muted
               playsInline
+              suppressHydrationWarning
               onTimeUpdate={(e) => {
                 const vid = e.currentTarget;
                 if (vid.currentTime >= MAX_VIDEO_SECONDS) {

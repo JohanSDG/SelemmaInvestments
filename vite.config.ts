@@ -27,5 +27,14 @@ export default defineConfig({
   },
   vite: {
     plugins: [windowsSafeMcpPlugin],
+    build: {
+      chunkSizeWarningLimit: 1000,
+      rolldownOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === "MODULE_LEVEL_DIRECTIVE") return;
+          warn(warning);
+        },
+      },
+    },
   },
 });

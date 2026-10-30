@@ -225,7 +225,7 @@ function ContactPage() {
         ) : (
           <form
             onSubmit={onSubmit}
-            className="mt-10 space-y-5 rounded-sm border border-white/10 bg-white/[0.03] p-6 md:p-8"
+            className="mt-10 space-y-5 rounded-sm border border-white/10 bg-white/3 p-6 md:p-8"
           >
             <div className="hidden" aria-hidden="true">
               <label>
@@ -293,7 +293,7 @@ function ContactPage() {
             </div>
 
             {solution ? (
-              <div className="space-y-5 rounded-sm border border-gold/25 bg-gold/[0.05] p-5">
+              <div className="space-y-5 rounded-sm border border-gold/25 bg-gold/5 p-5">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
                   Detalles de la solución
                 </div>
@@ -370,7 +370,7 @@ function ContactPage() {
             </Field>
 
             {/* Dos casillas separadas y desmarcadas por defecto — Cumplimiento SIC / Ley 1581 de 2012 */}
-            <div className="space-y-3 rounded-sm border border-white/10 bg-white/[0.02] p-4">
+            <div className="space-y-3 rounded-sm border border-white/10 bg-white/2 p-4">
               <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-white/80">
                 <input
                   type="checkbox"
@@ -442,7 +442,7 @@ function ContactPage() {
 }
 
 const inputCls =
-  "w-full rounded-sm border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-gold focus:bg-white/[0.07]";
+  "w-full rounded-sm border border-white/15 bg-white/4 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition focus:border-gold focus:bg-white/7";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

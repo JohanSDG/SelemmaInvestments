@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import InversionAlternativa from "@/components/InversionAlternativa";
 import financialHeroImg from "@/assets/financial-hero.jpg";
-import { Nav, Footer } from "./index";
+import { Nav, Footer } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/servicios-financieros")({
   head: () => ({
@@ -38,7 +38,7 @@ function ServiciosFinancierosPage() {
             }}
           />
           <div className="mx-auto w-full max-w-5xl px-6 sm:px-8 lg:px-10">
-            <div className="inline-flex items-center gap-2.5 rounded-sm border border-[#C8A96A]/55 bg-black/35 px-3.5 py-1.5 backdrop-blur-xs">
+            <div className="inline-flex items-center gap-2.5 rounded-sm border border-[#C8A96A]/55 bg-black/35 px-3.5 py-1.5 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
               <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-gold">
                 SELEMMA INVESTMENTS
@@ -86,7 +86,7 @@ function ServiciosFinancierosPage() {
 
                 {/* Tarjetas laterales de respaldo institucional con borde resaltado */}
                 <div className="grid gap-3 sm:grid-cols-3 lg:col-span-4 lg:grid-cols-1">
-                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-xs">
+                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-sm">
                     <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8C6D32]">
                       Arquitectura Patrimonial
                     </p>
@@ -94,7 +94,7 @@ function ServiciosFinancierosPage() {
                       Estructuras hechas a la medida del perfil y horizonte de cada inversionista.
                     </p>
                   </div>
-                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-xs">
+                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-sm">
                     <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8C6D32]">
                       Activos Refugio Tangibles
                     </p>
@@ -102,7 +102,7 @@ function ServiciosFinancierosPage() {
                       Diversificación internacional con respaldo fiduciario de primer orden.
                     </p>
                   </div>
-                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-xs">
+                  <div className="rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-4 py-3.5 shadow-sm">
                     <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8C6D32]">
                       Debida Diligencia
                     </p>

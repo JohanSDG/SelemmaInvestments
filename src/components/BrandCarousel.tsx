@@ -44,8 +44,8 @@ export function BrandCarousel() {
           <Row />
           <Row ariaHidden />
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[color:var(--color-navy)] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[color:var(--color-navy)] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-navy to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-navy to-transparent" />
       </div>
     </section>
   );

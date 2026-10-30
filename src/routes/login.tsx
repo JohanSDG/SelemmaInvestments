@@ -129,7 +129,7 @@ function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-navy px-4 py-16 text-white">
-      <div className="w-full max-w-md rounded-sm border border-white/10 bg-white/[0.03] p-8">
+      <div className="w-full max-w-md rounded-sm border border-white/10 bg-white/3 p-8">
         <h1 className="text-xl font-semibold text-white">
           {mode === "signin" ? "Iniciar sesión" : "Crear cuenta"}
         </h1>
@@ -155,7 +155,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Correo electrónico"
-            className="w-full rounded-sm border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
+            className="w-full rounded-sm border border-white/15 bg-white/4 px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
           />
           <input
             type="password"
@@ -164,11 +164,11 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
-            className="w-full rounded-sm border border-white/15 bg-white/[0.04] px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
+            className="w-full rounded-sm border border-white/15 bg-white/4 px-3.5 py-2.5 text-sm text-white placeholder:text-white/35 outline-none focus:border-gold"
           />
 
           {mode === "signup" && (
-            <div className="space-y-2.5 rounded-sm border border-white/10 bg-white/[0.02] p-3.5 text-xs text-white/80">
+            <div className="space-y-2.5 rounded-sm border border-white/10 bg-white/2 p-3.5 text-xs text-white/80">
               <label className="flex cursor-pointer items-start gap-2.5">
                 <input
                   type="checkbox"

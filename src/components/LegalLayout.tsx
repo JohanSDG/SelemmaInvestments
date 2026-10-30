@@ -65,7 +65,7 @@ export function LegalLayout({
                 className={`rounded-sm border px-4 py-2 text-xs font-medium transition ${
                   isActive
                     ? "border-gold bg-gold text-navy"
-                    : "border-white/15 bg-white/[0.03] text-white/70 hover:border-gold/40 hover:text-white"
+                    : "border-white/15 bg-white/3 text-white/70 hover:border-gold/40 hover:text-white"
                 }`}
               >
                 {item.label}
@@ -110,7 +110,7 @@ export function LegalSection({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-sm border border-white/10 bg-white/[0.02] p-6 md:p-8">
+    <section className="rounded-sm border border-white/10 bg-white/2 p-6 md:p-8">
       <div className="flex items-baseline gap-3">
         <span className="text-xs font-semibold tracking-[0.2em] text-gold">{number}</span>
         <h2 className="text-lg font-semibold text-white">{title}</h2>

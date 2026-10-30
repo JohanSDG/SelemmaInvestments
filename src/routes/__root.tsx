@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import selemmaLogo from "@/assets/selemma-logo-256.png?url";
+import selemmaLogo from "@/assets/selemma-logo-256.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 
