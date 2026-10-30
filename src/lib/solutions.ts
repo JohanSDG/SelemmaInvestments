@@ -44,12 +44,7 @@ export const SOLUTIONS: Record<string, SolutionConfig> = {
         label: "Objetivo principal",
         required: true,
         type: "select",
-        options: [
-          "Valoración y viabilidad financiera",
-          "Estructuración fiscal y patrimonial",
-          "Estudio de mercado y absorción",
-          "Optimización de portafolio actual",
-        ],
+        options: ["Comprar", "Vender"],
       },
     ],
   },

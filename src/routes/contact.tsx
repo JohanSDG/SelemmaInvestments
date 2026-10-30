@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
 import { submitLead, type LeadInput } from "@/lib/leads.functions";
-import { COUNTRIES } from "@/lib/countries";
-import { getSolution } from "@/lib/solutions";
+import { COUNTRIES, getCountryByName } from "@/lib/countries";
+import { getSolution, SOLUTIONS } from "@/lib/solutions";
 import {
   createConsentAuditProof,
   LEGAL_VERSIONS,
@@ -51,7 +51,8 @@ const MAX_MESSAGE = 300;
 
 function ContactPage() {
   const { s } = Route.useSearch();
-  const solution = getSolution(s);
+  const [selectedSlug, setSelectedSlug] = useState<string>(s ?? "");
+  const solution = getSolution(selectedSlug);
   const send = useServerFn(submitLead);
   const [form, setForm] = useState<LeadInput>({
     nombre: "",
@@ -66,12 +67,57 @@ function ContactPage() {
   });
   const [extra, setExtra] = useState<Record<string, string>>({});
   const [pais, setPais] = useState("");
+  const [phoneDigits, setPhoneDigits] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const [savedProof, setSavedProof] = useState<ConsentAuditProof | null>(null);
 
+  useEffect(() => {
+    setSelectedSlug(s ?? "");
+    setExtra({});
+  }, [s]);
+
+  const selectedCountry = getCountryByName(pais);
+
   const update = <K extends keyof LeadInput>(k: K, v: LeadInput[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
+
+  function handleCountryChange(newPais: string) {
+    setPais(newPais);
+    const countryObj = getCountryByName(newPais);
+    if (countryObj) {
+      const trimmed = phoneDigits.slice(0, countryObj.maxDigits);
+      setPhoneDigits(trimmed);
+      update("celular", trimmed ? `${countryObj.dialCode} ${trimmed}` : countryObj.dialCode);
+    } else {
+      update("celular", phoneDigits);
+    }
+  }
+
+  function handlePhoneDigitsChange(rawInput: string) {
+    const maxLen = selectedCountry ? selectedCountry.maxDigits : 15;
+    let digitsOnly = rawInput.replace(/\D/g, "");
+    if (selectedCountry && selectedCountry.dialCode.length > 1) {
+      const codeDigits = selectedCountry.dialCode.replace(/\D/g, "");
+      if (
+        digitsOnly.length > maxLen &&
+        codeDigits.length > 0 &&
+        digitsOnly.startsWith(codeDigits)
+      ) {
+        digitsOnly = digitsOnly.slice(codeDigits.length);
+      }
+    }
+    const limited = digitsOnly.slice(0, maxLen);
+    setPhoneDigits(limited);
+    update(
+      "celular",
+      selectedCountry
+        ? limited
+          ? `${selectedCountry.dialCode} ${limited}`
+          : selectedCountry.dialCode
+        : limited,
+    );
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -88,8 +134,21 @@ function ContactPage() {
         return;
       }
     }
-    if (!pais) {
-      setError("Seleccione su país.");
+    if (!pais || !selectedCountry) {
+      setError("Seleccione su país para validar el indicativo y número de celular.");
+      return;
+    }
+    if (
+      phoneDigits.length < selectedCountry.minDigits ||
+      phoneDigits.length > selectedCountry.maxDigits
+    ) {
+      const rangeMsg =
+        selectedCountry.minDigits === selectedCountry.maxDigits
+          ? `${selectedCountry.minDigits} dígitos`
+          : `entre ${selectedCountry.minDigits} y ${selectedCountry.maxDigits} dígitos`;
+      setError(
+        `El número de celular para ${selectedCountry.name} (${selectedCountry.dialCode}) debe tener ${rangeMsg} (actualmente tiene ${phoneDigits.length}).`,
+      );
       return;
     }
     if (!form.aceptaTerminos) {
@@ -102,6 +161,8 @@ function ContactPage() {
       );
       return;
     }
+
+    const fullCelular = `${selectedCountry.dialCode} ${phoneDigits}`;
 
     setStatus("loading");
     try {
@@ -122,6 +183,7 @@ function ContactPage() {
       await send({
         data: {
           ...form,
+          celular: fullCelular,
           interes,
           pais,
           solucion: solution ? solution.title : "",
@@ -133,6 +195,7 @@ function ContactPage() {
           },
         },
       });
+      update("celular", fullCelular);
       setSavedProof(proof);
       setStatus("success");
     } catch (err) {
@@ -263,21 +326,57 @@ function ContactPage() {
                 />
               </Field>
               <Field label="Celular / WhatsApp *">
-                <input
-                  required
-                  type="tel"
-                  maxLength={30}
-                  placeholder="+57 300 000 0000"
-                  value={form.celular}
-                  onChange={(e) => update("celular", e.target.value)}
-                  className={inputCls}
-                />
+                <div className="flex items-stretch">
+                  <span
+                    title={
+                      selectedCountry
+                        ? `Indicativo automático de ${selectedCountry.name}`
+                        : "Seleccione un país para generar el indicativo"
+                    }
+                    className="inline-flex shrink-0 items-center justify-center rounded-l-sm border border-r-0 border-white/15 bg-gold/15 px-3.5 text-sm font-semibold text-gold select-none"
+                  >
+                    {selectedCountry ? selectedCountry.dialCode : "+--"}
+                  </span>
+                  <input
+                    required
+                    type="tel"
+                    inputMode="numeric"
+                    maxLength={selectedCountry ? selectedCountry.maxDigits : 15}
+                    placeholder={
+                      selectedCountry
+                        ? selectedCountry.placeholder
+                        : "Seleccione país e ingrese número"
+                    }
+                    value={phoneDigits}
+                    onChange={(e) => handlePhoneDigitsChange(e.target.value)}
+                    className={`${inputCls} rounded-l-none`}
+                  />
+                </div>
+                <div className="mt-1.5 flex items-center justify-between gap-2 text-[11px] leading-snug">
+                  <span className="text-white/55">
+                    {selectedCountry
+                      ? selectedCountry.hint
+                      : "Elija primero su país para generar el indicativo y límite de dígitos."}
+                  </span>
+                  {selectedCountry && (
+                    <span
+                      className={`shrink-0 font-semibold ${
+                        phoneDigits.length >= selectedCountry.minDigits &&
+                        phoneDigits.length <= selectedCountry.maxDigits
+                          ? "text-gold"
+                          : "text-white/45"
+                      }`}
+                    >
+                      {phoneDigits.length}/{selectedCountry.maxDigits} dígitos
+                    </span>
+                  )}
+                </div>
               </Field>
               <Field label="País de residencia o inversión *">
                 <select
                   required
                   value={pais}
-                  onChange={(e) => setPais(e.target.value)}
+                  onChange={(e) => handleCountryChange(e.target.value)}
                   className={`${inputCls} appearance-none`}
                 >
                   <option value="" disabled>
@@ -285,18 +384,51 @@ function ContactPage() {
                   </option>
                   {COUNTRIES.map((c) => (
                     <option key={c.iso} value={c.name} className="bg-navy text-white">
-                      {c.name}
+                      {c.name} ({c.dialCode})
                     </option>
                   ))}
                 </select>
+                {selectedCountry && (
+                  <p className="mt-1.5 text-[11px] text-gold/85">
+                    Indicativo {selectedCountry.dialCode} aplicado automáticamente en Celular.
+                  </p>
+                )}
               </Field>
             </div>
 
-            {solution ? (
-              <div className="space-y-5 rounded-sm border border-gold/25 bg-gold/5 p-5">
+            <div className="space-y-5 rounded-sm border border-gold/25 bg-gold/5 p-5">
+              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
                   Detalles de la solución
                 </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { slug: "consultoria", label: "Servicio de Consultoría" },
+                    { slug: "usuarios", label: "Representación de Usuarios" },
+                  ].map((opt) => {
+                    const active = selectedSlug === opt.slug;
+                    return (
+                      <button
+                        key={opt.slug}
+                        type="button"
+                        onClick={() => {
+                          setSelectedSlug(opt.slug);
+                          setExtra({});
+                        }}
+                        className={`rounded-sm border px-3 py-1.5 text-[11px] font-semibold transition ${
+                          active
+                            ? "border-gold bg-gold text-navy"
+                            : "border-white/15 bg-white/4 text-white/70 hover:border-gold/40 hover:text-white"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {solution ? (
                 <div className="grid gap-5 md:grid-cols-2">
                   {solution.fields.map((f) => (
                     <Field key={f.name} label={`${f.label}${f.required ? " *" : ""}`}>
@@ -333,28 +465,34 @@ function ContactPage() {
                     </Field>
                   ))}
                 </div>
-              </div>
-            ) : (
-              <Field label="Interés principal *">
-                <select
-                  required
-                  value={form.interes as string}
-                  onChange={(e) =>
-                    update("interes", e.target.value as LeadInput["interes"])
-                  }
-                  className={`${inputCls} appearance-none`}
-                >
-                  <option value="" disabled>
-                    Seleccione una opción…
-                  </option>
-                  {INTERESES.map((i) => (
-                    <option key={i} value={i} className="bg-navy text-white">
-                      {i}
+              ) : (
+                <Field label="Interés principal *">
+                  <select
+                    required
+                    value={form.interes as string}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      update("interes", val as LeadInput["interes"]);
+                      if (val === "Consultoría patrimonial" && SOLUTIONS.consultoria) {
+                        setSelectedSlug("consultoria");
+                      } else if (val === "Alquilar oficina/espacio" && SOLUTIONS.usuarios) {
+                        setSelectedSlug("usuarios");
+                      }
+                    }}
+                    className={`${inputCls} appearance-none`}
+                  >
+                    <option value="" disabled>
+                      Seleccione una opción…
                     </option>
-                  ))}
-                </select>
-              </Field>
-            )}
+                    {INTERESES.map((i) => (
+                      <option key={i} value={i} className="bg-navy text-white">
+                        {i}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              )}
+            </div>
 
             <Field
               label={`Objetivo patrimonial (opcional — ${(form.mensaje ?? "").length}/${MAX_MESSAGE})`}
