@@ -12,7 +12,7 @@ import {
 
 import warehouseImg from "../assets/warehouse.jpg";
 import hotelImg from "../assets/hotel.jpg";
-import { RotatingGlobe } from "../components/RotatingGlobe";
+import heroVideo from "../assets/video-principal.mp4";
 import { BrandCarousel } from "../components/BrandCarousel";
 import { Nav, Footer } from "../components/SiteLayout";
 
@@ -44,7 +44,7 @@ function SelemmaHome() {
       <Nav />
       <Hero />
       <BrandCarousel />
-      <ValueProps />
+      <Trayectoria />
       <Solutions />
       <Differentiators />
       <AudienceVision />
@@ -54,92 +54,97 @@ function SelemmaHome() {
   );
 }
 
-function Hero() {
+const TRAYECTORIA_STATS = [
+  { value: "+10", label: "Años de experiencia" },
+  { value: "+10 M", label: "Millones de dólares en venta" },
+  { value: "6,500", label: "Market off properties exclusivas" },
+  { value: "$1 Billón USD", label: "Valor total de activos" },
+  { value: "+300", label: "Colaboradores externos dedicados" },
+  { value: "4", label: "Países con presencia" },
+];
+
+function Trayectoria() {
   return (
-    <section className="relative isolate overflow-hidden bg-navy pb-24 pt-36 lg:pt-44">
-      {/* Rotating dotted globe centred on Latin America */}
-      <div className="pointer-events-none absolute right-4 top-28 hidden h-[380px] w-[380px] text-gold/35 md:block lg:right-8 lg:top-24 lg:h-[430px] lg:w-[430px]">
-        <RotatingGlobe className="h-full w-full" />
-        <div
-          className="absolute inset-0 -z-10 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(10,20,51,0.85) 0%, transparent 65%)" }}
-        />
-      </div>
-
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, var(--color-navy) 0%, color-mix(in oklab, var(--color-navy) 88%, transparent) 50%, transparent 100%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-6xl px-6">
-        <span className="eyebrow text-gold">
-          <span className="dot-gold" /> SELEMMA INVESTMENTS
-        </span>
-        <h1 className="mt-7 max-w-3xl text-[32px] font-medium leading-[1.12] tracking-[-0.02em] text-white sm:text-[42px] lg:text-[52px]">
-          Tu Inversión
-          <span className="mt-1 block text-gold">con criterio para su patrimonio.</span>
-        </h1>
-        <p className="mt-6 max-w-xl text-[14px] leading-[1.7] text-white/60 md:text-[15px]">
-          Conectamos capital privado con activos off-market mediante análisis financiero,
-          estrategia fiscal y acompañamiento integral.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center gap-3.5">
-          <Link to="/contact" className="btn-pill btn-gold">
-            Agendar Reunión de Inversión
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <a href="#soluciones" className="btn-pill btn-ghost-light">
-            Nuestras soluciones
-            <ArrowRight className="h-4 w-4" />
-          </a>
+    <section id="trayectoria" className="bg-silver py-20 text-navy md:py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-[26px] font-semibold leading-snug md:text-[32px]">
+            Nuestra trayectoria como{" "}
+            <span className="font-serif italic text-gold">consultora</span> de inversiones
+            inmobiliarias
+          </h2>
+          <p className="mt-4 text-[13.5px] leading-relaxed text-navy/65">
+            En Selemma Investments somos especialistas en proyectos inmobiliarios, de inversión y
+            bienes raíces, con una trayectoria que nace en República Dominicana y luego se expande
+            a los más relevantes destinos turísticos en Panamá, Estados Unidos y Colombia.
+          </p>
         </div>
-        <p className="mt-7 text-[11.5px] tracking-[0.02em] text-white/45">
-          Capital privado · Empresas · Propietarios
-        </p>
+
+        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
+          {TRAYECTORIA_STATS.map((s) => (
+            <div
+              key={s.label}
+              className="flex min-h-[150px] flex-col justify-between rounded-sm border-t-2 border-gold bg-white p-6 shadow-sm md:min-h-[190px]"
+            >
+              <div className="font-serif text-[26px] italic text-navy md:text-[34px]">
+                {s.value}
+              </div>
+              <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-navy">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link to="/nosotros" className="btn-pill btn-gold inline-flex items-center gap-2 text-[13px]">
+            Más información
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
-function ValueProps() {
+function Hero() {
   return (
-    <section className="bg-silver py-14 md:py-16 text-navy">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <span className="eyebrow text-navy/55">
-              <span className="dot-gold" /> Nuestra propuesta
-            </span>
-            <h2 className="mt-3.5 text-[22px] font-medium leading-[1.16] tracking-[-0.02em] text-navy md:text-[30px]">
-              Antes del activo,
-              <br />
-              la estrategia.
-            </h2>
-          </div>
-          <div className="lg:col-span-7">
-            <p className="max-w-xl text-[13.5px] leading-[1.7] text-navy/65">
-              Definimos con usted el retorno objetivo, el horizonte de inversión y las
-              prioridades de su patrimonio. A partir de ese mandato evaluamos
-              oportunidades y estructuramos una decisión con fundamentos.
-            </p>
-            <div className="mt-6 grid grid-cols-3 gap-5 border-t border-navy/10 pt-5">
-              <div>
-                <div className="text-[12.5px] font-semibold text-navy">Originación</div>
-                <div className="mt-0.5 text-[12px] text-navy/55">Off-market</div>
-              </div>
-              <div>
-                <div className="text-[12.5px] font-semibold text-navy">Análisis</div>
-                <div className="mt-0.5 text-[12px] text-navy/55">Financiero</div>
-              </div>
-              <div>
-                <div className="text-[12.5px] font-semibold text-navy">Estructuración</div>
-                <div className="mt-0.5 text-[12px] text-navy/55">Patrimonial</div>
-              </div>
-            </div>
-          </div>
+    <section className="relative isolate flex aspect-video max-h-[calc(100vh-72px)] min-h-[460px] w-full items-center overflow-hidden bg-navy mt-[72px]">
+      {/* Video principal (36 s) en bucle automático, mostrado completo (sin zoom excesivo) */}
+      <video
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        src={heroVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
+      {/* Contraste suave: solo lateral izquierdo (texto) y base */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(6,13,31,0.6) 0%, rgba(6,13,31,0.3) 35%, rgba(6,13,31,0) 60%), linear-gradient(0deg, rgba(6,13,31,0.4) 0%, rgba(6,13,31,0) 35%)",
+        }}
+      />
+
+      <div className="relative w-full px-6 sm:px-10 lg:px-14">
+        <span className="mb-4 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/90">
+          <span className="h-px w-9 bg-white/70" /> SELEMMA INVESTMENTS
+        </span>
+        <h1 className="max-w-xl text-[26px] font-medium leading-[1.2] tracking-[-0.01em] text-white sm:text-[28px] lg:text-[34px]">
+          Inversión con criterio{" "}<br />para su patrimonio.
+        </h1>
+        <div className="mt-5">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-2.5 text-[12.5px] font-semibold text-navy shadow-lg transition hover:bg-white/90"
+          >
+            Agendar reunión
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
@@ -329,28 +334,39 @@ function Differentiators() {
 
 function AudienceVision() {
   return (
-    <section id="inversores" className="bg-silver py-28 text-navy">
+    <section id="nosotros-resumen" className="bg-silver py-24 text-navy">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <span className="eyebrow text-navy/50">
-              <span className="dot-gold" /> Perfil del inversionista
+              <span className="dot-gold" /> Sobre Nosotros
             </span>
-            <h2 className="mt-6 text-[26px] font-semibold md:text-[34px]">
-              Para quien piensa en <span className="text-gold">patrimonio</span>, no en pagos.
+            <h2 className="mt-5 text-[26px] font-semibold leading-snug md:text-[34px]">
+              Una relación de toda la vida como su{" "}
+              <span className="text-gold">asesor de confianza.</span>
             </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-navy/70">
-              Trabajamos con inversionistas, empresarios y corporaciones multinacionales — fondos
-              privados y públicos que buscan retorno real, ventajas fiscales y estrategia de largo
-              plazo.
+            <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-navy/70">
+              En <strong>Selemma Properties e Investments</strong> estructuramos inversiones
+              inmobiliarias y patrimoniales de alto valor en Latinoamérica, EE.UU. y Europa,
+              integrando consultoría estratégica, inteligencia predictiva de ubicación y un proceso
+              acompañado en 5 etapas.
             </p>
+            <div className="mt-7">
+              <Link
+                to="/nosotros"
+                className="btn-pill btn-gold inline-flex items-center gap-2 text-[13px]"
+              >
+                Conoce más sobre nosotros
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
 
-          <div className="relative flex flex-col justify-center rounded-sm border-t border-gold bg-navy-surface p-10 text-white">
+          <div className="relative flex flex-col justify-center rounded-sm border-t-2 border-gold bg-navy-surface p-9 text-white shadow-[0_18px_45px_rgba(6,13,31,0.14)] md:p-10">
             <span className="eyebrow text-gold">
               <span className="dot-gold" /> Nuestra visión
             </span>
-            <h3 className="mt-6 text-[22px] font-semibold leading-snug text-white md:text-[28px]">
+            <h3 className="mt-5 text-[22px] font-semibold leading-snug text-white md:text-[28px]">
               Ser la compañía <span className="text-gold">líder</span> en innovación inmobiliaria
               de Latinoamérica.
             </h3>

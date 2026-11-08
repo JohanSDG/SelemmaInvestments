@@ -36,7 +36,7 @@ const InversionAlternativa = () => {
         <div className="inline-flex items-center gap-2 rounded-sm border border-[#C8A96A]/55 bg-[#FAF8F4] px-3.5 py-1 mb-3 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-[#C8A96A]" />
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8C6D32]">
-            Materias Preciosas · London DE Group
+            Materias Preciosas · Selemma Investments
           </p>
         </div>
         <h2 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight">

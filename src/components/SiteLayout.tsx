@@ -9,7 +9,6 @@ export function Nav() {
   const links = [
     { label: "Soluciones", href: "/#soluciones" },
     { label: "Diferenciadores", href: "/#diferenciadores" },
-    { label: "Inversionistas", href: "/#inversores" },
   ];
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur-md">
@@ -112,11 +111,6 @@ export function Footer() {
               <li>
                 <a href="/#diferenciadores" className="hover:text-gold">
                   Diferenciadores
-                </a>
-              </li>
-              <li>
-                <a href="/#inversores" className="hover:text-gold">
-                  Inversionistas
                 </a>
               </li>
             </ul>

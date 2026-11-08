@@ -518,10 +518,10 @@ function NosotrosPage() {
                   <img
                     src={johanSandovalImg}
                     alt="Johan Steven Sandoval Gómez — CEO Global y Consultor Senior"
-                    className="h-full w-full origin-top scale-[1.06] object-cover object-top"
+                    className="h-full w-full origin-top scale-[1.10] object-cover object-top"
                   />
                   <a
-                    href="https://www.linkedin.com/company/selemma-investments"
+                    href="https://www.linkedin.com/in/johansandovalgomez/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn de Johan Steven Sandoval Gómez"
